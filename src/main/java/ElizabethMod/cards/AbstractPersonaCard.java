@@ -1,12 +1,15 @@
 package ElizabethMod.cards;
 
+import ElizabethMod.arcana.AbstractArcanaPower;
 import ElizabethMod.enums.AbstractCardEnum;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public abstract class AbstractPersonaCard extends CustomCard {
     public boolean isPersona = true;
-    public String Arcana;
+    public String arcana;
+    public int personaValue = 1;
+    public boolean doBonus = false;
 
     public AbstractPersonaCard(final String id, final String name, final String img, final int cost, final String rawDescription,
                               final AbstractCard.CardType type, final AbstractCard.CardColor color,
@@ -16,7 +19,21 @@ public abstract class AbstractPersonaCard extends CustomCard {
 
     public abstract String setArcana();
 
+    public abstract int setPersonaValue();
+
+    public void bonus() {
+        String playerArcana = AbstractArcanaPower.getPlayerArcana();
+        assert playerArcana != null;
+        if (playerArcana.equals(this.arcana)) {
+            this.doBonus = true;
+        }
+    }
+
     public boolean isPersona() {
         return this.isPersona;
     }
+
+    public String getArcana() { return this.arcana; }
+
+    public int getPersonaValue() { return this.personaValue; }
 }
