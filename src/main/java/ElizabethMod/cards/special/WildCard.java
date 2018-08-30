@@ -18,9 +18,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class WildCard extends CustomCard {
     public static final String ID = "Elizabeth:WildCard";
     private static CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
-    public static final String NAME = cardStrings.NAME;
-    public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG_PATH = "ElizabethImgs/cards/WildCard.png";
+    private static final String NAME = cardStrings.NAME;
+    private static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    private static final String IMG_PATH = "ElizabethImgs/cards/WildCard.png";
     private static final int COST = 0;
     private static final CardRarity rarity = CardRarity.SPECIAL;
     private static final CardTarget target = CardTarget.SELF;

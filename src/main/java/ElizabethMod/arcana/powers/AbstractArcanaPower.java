@@ -1,4 +1,4 @@
-package ElizabethMod.arcana;
+package ElizabethMod.arcana.powers;
 
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;

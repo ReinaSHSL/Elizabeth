@@ -11,8 +11,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 public class WildCardPower extends AbstractPower {
     public static final String POWER_ID = "Elizabeth:WildCardPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
-    public static final String NAME = powerStrings.NAME;
-    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+    private static final String NAME = powerStrings.NAME;
+    private static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
 
     public WildCardPower(AbstractCreature owner, int amount) {
@@ -28,13 +28,6 @@ public class WildCardPower extends AbstractPower {
     @Override
     public void atEndOfTurn(boolean isPlayer) {
         AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, this.POWER_ID));
-    }
-
-    @Override
-    public void stackPower(int stackAmount)
-    {
-        this.fontScale = 8.0F;
-        this.amount += stackAmount;
     }
 
     @Override

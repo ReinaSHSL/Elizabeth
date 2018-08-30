@@ -1,7 +1,6 @@
 package ElizabethMod.cards;
 
-import ElizabethMod.arcana.AbstractArcanaPower;
-import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.arcana.powers.AbstractArcanaPower;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
@@ -16,10 +15,6 @@ public abstract class AbstractPersonaCard extends CustomCard {
                               final AbstractCard.CardRarity rarity, final AbstractCard.CardTarget target) {
         super(id, name, img, cost, rawDescription, type, color, rarity, target);
     }
-
-    public abstract String setArcana();
-
-    public abstract int setPersonaValue();
 
     public void bonus() {
         String playerArcana = AbstractArcanaPower.getPlayerArcana();
