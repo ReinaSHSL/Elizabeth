@@ -1,22 +1,27 @@
 package ElizabethMod.character;
 
+import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.enums.ElizabethEnum;
 import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
+import basemod.interfaces.OnStartBattleSubscriber;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.daily.DailyMods;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import java.util.ArrayList;
 
 public class Elizabeth extends CustomPlayer {
     public static final int ENERGY_PER_TURN = 3;
-    public static final String MY_CHARACTER_SHOULDER_2 = "char/shoulder2.png"; // campfire pose
-    public static final String MY_CHARACTER_SHOULDER_1 = "char/shoulder.png"; // another campfire pose
-    public static final String MY_CHARACTER_CORPSE = "char/corpse.png"; // dead corpse
-    public static final String MY_CHARACTER_ANIMATION = "char/animation.scml"; // spriter animation
+    public static final String MY_CHARACTER_SHOULDER_2 = "ElizabethImgs/char/shoulder2.png"; // campfire pose
+    public static final String MY_CHARACTER_SHOULDER_1 = "ElizabethImgs/char/shoulder.png"; // another campfire pose
+    public static final String MY_CHARACTER_CORPSE = "ElizabethImgs/char/corpse.png"; // dead corpse
+    public static final String MY_CHARACTER_ANIMATION = "ElizabethImgs/char/animation.scml"; // spriter animation
 
     public Elizabeth (String name, PlayerClass setClass) {
         super(name, setClass, null, null, null, new SpriterAnimation(MY_CHARACTER_ANIMATION));
@@ -54,4 +59,5 @@ public class Elizabeth extends CustomPlayer {
                 STARTING_HP, MAX_HP, 0, STARTING_GOLD, HAND_SIZE,
                 ElizabethEnum.ATTENDANT, getStartingRelics(), getStartingDeck(), false);
     }
+
 }
