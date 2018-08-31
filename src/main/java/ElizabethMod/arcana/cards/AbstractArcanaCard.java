@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public abstract class AbstractArcanaCard extends CustomCard {
     public AbstractArcanaPower arcanaPower;
+    public String arcanaString;
 
     public AbstractArcanaCard(final String id, final String name, final String img, final int cost, final String rawDescription,
                                final AbstractCard.CardType type, final AbstractCard.CardColor color,

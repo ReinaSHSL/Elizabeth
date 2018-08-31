@@ -24,6 +24,7 @@ public class Fool extends AbstractArcanaCard {
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
         this.arcanaPower = new FoolPower();
+        this.arcanaString = "Fool";
     }
 
     @Override

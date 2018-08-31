@@ -3,6 +3,8 @@ package ElizabethMod.actions;
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.arcana.powers.AbstractArcanaPower;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
+import ElizabethMod.arcana.powers.EmperorPower;
+import ElizabethMod.powers.AuthorityPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -11,11 +13,13 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class ArcanaSwapAction extends AbstractGameAction {
     private static String[] TEXT;
     private AbstractPlayer p;
+    private AbstractMonster m = null;
 
     public ArcanaSwapAction(AbstractPlayer p) {
         this.p = p;
@@ -45,6 +49,10 @@ public class ArcanaSwapAction extends AbstractGameAction {
             if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     card = (AbstractArcanaCard)c;
+                    switch (((AbstractArcanaCard) c).arcanaString) {
+                        case "Emperor":
+                            new TargetAction(((AbstractArcanaCard) c).arcanaString, 1);
+                    }
                     AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, card.arcanaPower));
                     this.isDone = true;
                 }

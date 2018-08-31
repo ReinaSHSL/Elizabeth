@@ -27,6 +27,7 @@ public class Priestess extends AbstractArcanaCard {
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
         this.arcanaPower = new PriestessPower();
+        this.arcanaString = "Priestess";
     }
 
     @Override

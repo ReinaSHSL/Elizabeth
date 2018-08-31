@@ -28,6 +28,7 @@ public class Magician extends AbstractArcanaCard {
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
         this.arcanaPower = new MagicianPower();
+        this.arcanaString = "Magician";
     }
 
     @Override
