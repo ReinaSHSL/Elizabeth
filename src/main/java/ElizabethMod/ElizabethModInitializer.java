@@ -13,6 +13,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -46,6 +47,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     public static ArrayList<AbstractArcanaCard> arcanaList = new ArrayList<>();
     public static AllOutAttackChoiceScreen aoas;
     public static ArrayList<AbstractPersonaCard> compendium = new ArrayList<>();
+    public static ArrayList<AbstractCard> listOfBasicPersona = new ArrayList<>();
 
     public ElizabethModInitializer() {
         BaseMod.subscribe(this);
