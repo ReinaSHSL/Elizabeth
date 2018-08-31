@@ -6,7 +6,7 @@ import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.enums.ElizabethEnum;
-import ElizabethMod.screens.AllOutAttackChoiceScreen;
+import ElizabethMod.ui.screens.AllOutAttackChoiceScreen;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -19,7 +19,6 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.screens.CardRewardScreen;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;

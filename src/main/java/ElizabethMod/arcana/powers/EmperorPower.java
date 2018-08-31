@@ -13,21 +13,18 @@ public class EmperorPower extends AbstractArcanaPower {
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     private static final String NAME = powerStrings.NAME;
     private static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    private AbstractMonster target;
 
 
-    public EmperorPower(AbstractMonster target) {
+    public EmperorPower() {
         this.name = NAME;
         this.ID = POWER_ID;
         updateDescription();
         this.img = getEmperorPowerTexture();
         this.canGoNegative = false;
-        this.target = target;
     }
 
     @Override
     public void onInitialApplication() {
-
     }
 
     @Override

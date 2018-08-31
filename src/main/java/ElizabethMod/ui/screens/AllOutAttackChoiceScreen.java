@@ -1,4 +1,4 @@
-package ElizabethMod.screens;
+package ElizabethMod.ui.screens;
 
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.cards.*;
