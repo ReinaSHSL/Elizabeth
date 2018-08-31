@@ -1,12 +1,7 @@
 package ElizabethMod.arcana.powers;
 
-import ElizabethMod.arcana.cards.AbstractArcanaCard;
-import ElizabethMod.cards.AbstractPersonaCard;
-import ElizabethMod.patches.AbstractDungeonPatch;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;

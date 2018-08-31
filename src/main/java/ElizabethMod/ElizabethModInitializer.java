@@ -1,6 +1,7 @@
 package ElizabethMod;
 
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
+import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
@@ -44,6 +45,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
 
     public static ArrayList<AbstractArcanaCard> arcanaList = new ArrayList<>();
     public static AllOutAttackChoiceScreen aoas;
+    public static ArrayList<AbstractPersonaCard> compendium = new ArrayList<>();
 
     public ElizabethModInitializer() {
         BaseMod.subscribe(this);

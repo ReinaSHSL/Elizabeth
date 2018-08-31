@@ -7,6 +7,7 @@ import ElizabethMod.character.Elizabeth;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class AllOutAttackAction extends AbstractGameAction {
     private ArrayList<AbstractCard> list = new ArrayList<>();
     private boolean allOutAttackChoice;
+    private SpriteBatch sb;
 
     public AllOutAttackAction() {
         this.duration = Settings.ACTION_DUR_FAST;
@@ -36,8 +38,16 @@ public class AllOutAttackAction extends AbstractGameAction {
             return;
         }
         if (ElizabethModInitializer.aoas.allOutAttackChoice.cardID.equals(AllOutAttackYes.ID)) {
-            Texture texture = new Texture(Gdx.files.internal("ElizabethImgs/char/aoaCutIn"));
-            Sprite sprite = new Sprite(texture, -750F * Settings.scale, 200F * Settings.scale, 999);
+            allOutAttack();
         }
+    }
+
+    private void allOutAttack() {
+        float y = Settings.HEIGHT - 300F * Settings.scale;
+        float x = Settings.WIDTH / 2F;
+        Texture cutIn = new Texture("ElizabethImgs/powers/DownedPower.png");
+        sb.draw(cutIn, x, y,
+                556.0f, 119.0f, 1112.0f, 238.0f, Settings.scale, Settings.scale,
+                0.0f, 0, 0, 1112, 238, false, false);
     }
 }

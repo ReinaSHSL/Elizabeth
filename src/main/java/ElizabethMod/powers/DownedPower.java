@@ -1,6 +1,7 @@
 package ElizabethMod.powers;
 
 import ElizabethMod.actions.AllOutAttackAction;
+import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
