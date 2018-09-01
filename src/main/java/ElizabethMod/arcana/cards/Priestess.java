@@ -17,6 +17,7 @@ public class Priestess extends AbstractArcanaCard {
     private static CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    private static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
     private static final String IMG_PATH = "ElizabethImgs/cards/Priestess.png";
     private static final int COST = 0;
     private static final CardRarity rarity = CardRarity.SPECIAL;
@@ -28,6 +29,8 @@ public class Priestess extends AbstractArcanaCard {
                 rarity, target);
         this.arcanaPower = new PriestessPower();
         this.arcanaString = "Priestess";
+        this.block = this.baseBlock = 5;
+        this.rawDescription = DESCRIPTION + this.block + EXTENDED_DESCRIPTION[0];
     }
 
     @Override

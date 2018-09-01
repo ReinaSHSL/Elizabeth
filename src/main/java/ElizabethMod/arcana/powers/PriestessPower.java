@@ -12,6 +12,7 @@ public class PriestessPower extends AbstractArcanaPower {
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     private static final String NAME = powerStrings.NAME;
     private static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+    public static int Block = 5;
 
 
     public PriestessPower() {
@@ -24,7 +25,7 @@ public class PriestessPower extends AbstractArcanaPower {
 
     @Override
     public void onInitialApplication() {
-        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, 5));
+        AbstractDungeon.actionManager.addToBottom(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, Block));
     }
 
     @Override

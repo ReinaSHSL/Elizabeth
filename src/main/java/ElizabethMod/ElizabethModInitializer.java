@@ -7,6 +7,7 @@ import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.enums.ElizabethEnum;
 import ElizabethMod.ui.screens.AllOutAttackChoiceScreen;
+import ElizabethMod.ui.screens.PersonaFusionScreen;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -47,6 +48,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     public static AllOutAttackChoiceScreen aoas;
     public static ArrayList<AbstractPersonaCard> compendium = new ArrayList<>();
     public static ArrayList<AbstractCard> listOfBasicPersona = new ArrayList<>();
+    public static PersonaFusionScreen personaFusionScreen = new PersonaFusionScreen();
 
     public ElizabethModInitializer() {
         BaseMod.subscribe(this);

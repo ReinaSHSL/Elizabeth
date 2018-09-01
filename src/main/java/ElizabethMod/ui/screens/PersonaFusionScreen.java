@@ -17,9 +17,7 @@ import com.megacrit.cardcrawl.helpers.input.InputHelper;
 
 import java.util.ArrayList;
 
-public class personaFusionScreen {
-
-    private QuestLog gameQuestLog;
+public class PersonaFusionScreen {
 
     private ArrayList<Hitbox> hbs = new ArrayList<Hitbox>();
     private boolean justClicked = false;
@@ -30,8 +28,7 @@ public class personaFusionScreen {
 
     public boolean openedDuringReward;
 
-    public QuestLogScreen(QuestLog log) {
-        gameQuestLog = log;
+    public PersonaFusionScreen() {
     }
 
     public void open() {
@@ -41,8 +38,6 @@ public class personaFusionScreen {
         AbstractDungeon.overlayMenu.proceedButton.hide();
         AbstractDungeon.overlayMenu.cancelButton.show("Return");
         AbstractDungeon.isScreenUp = true;
-        this.gameQuestLog = ElizabethModInitializer.questLog;
-
         if (MathUtils.randomBoolean()) {
             CardCrawlGame.sound.play("MAP_OPEN", 0.1f);
         }
@@ -67,28 +62,6 @@ public class personaFusionScreen {
 
     public void render(SpriteBatch sb) {
         sb.setColor(Color.WHITE);
-
-        int rI = 0, gI = 0, bI = 0;
-        int i = 0;
-        for(Quest quest : gameQuestLog) {
-            int index = i;
-            switch(quest.type) {
-                case BLUE:
-                    index = bI;
-                    bI++;
-                    break;
-                case GREEN:
-                    index = gI;
-                    gI++;
-                    break;
-                case RED:
-                    index = rI;
-                    rI++;
-                    break;
-            }
-            renderQuest(index, i, sb, quest);
-            i++;
-        }
         yScale = MathHelper.scaleLerpSnap(yScale, 1.0f);
         this.renderBanner(sb);
         justClicked = false;

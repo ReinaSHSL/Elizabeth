@@ -2,5 +2,26 @@
   "Elizabeth:WildCard": {
     "NAME": "Wild Card",
     "DESCRIPTION": "Switch Arcana. NL Soulbound. NL You can only use Wild Card once per turn."
-  }
+  },
+  "Elizabeth:Fool": {
+    "NAME": "Fool",
+    "DESCRIPTION": "Play the bonus of the first Persona 2 cards you play this turn."
+  },
+  "Elizabeth:Magician": {
+    "NAME": "Magician",
+    "DESCRIPTION": "Draw 2 cards."
+  },
+  "Elizabeth:Priestess": {
+    "NAME": "Priestess",
+    "DESCRIPTION": "Gain ",
+    "EXTENDED_DESCRIPTION": " Block."
+  },
+  "Elizabeth:WildCard": {
+    "NAME": "Wild Card",
+    "DESCRIPTION": "Switch Arcana. NL Soulbound. NL You can only use Wild Card once per turn."
+  },
+  "Elizabeth:WildCard": {
+    "NAME": "Wild Card",
+    "DESCRIPTION": "Switch Arcana. NL Soulbound. NL You can only use Wild Card once per turn."
+  },
 }
