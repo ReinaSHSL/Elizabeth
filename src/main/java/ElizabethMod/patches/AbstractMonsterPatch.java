@@ -2,6 +2,7 @@ package ElizabethMod.patches;
 
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.cards.AbstractPersonaCard;
+import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.ElizabethEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
@@ -13,11 +14,11 @@ import com.megacrit.cardcrawl.vfx.FastCardObtainEffect;
 
 public class AbstractMonsterPatch {
 
-    @SpirePatch(cls = "com.megacrit.cardcrawl.monsters.AbstractMonster", method = "die")
+    @SpirePatch(clz = AbstractMonster.class, method = "die", paramtypez = {boolean.class})
     public static class GainPersonaUponDeathPatch {
-        public static void Postfix(AbstractMonster __instance)
+        public static void Postfix(AbstractMonster __instance, boolean triggerRelics)
         {
-            if (AbstractDungeon.player.chosenClass == ElizabethEnum.ATTENDANT) {
+            if (AbstractDungeon.player instanceof Elizabeth) {
                 int rngSeed = AbstractDungeon.cardRandomRng.random(30);
                 AbstractCard c = ElizabethModInitializer.listOfBasicPersona.get(rngSeed);
                 AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction

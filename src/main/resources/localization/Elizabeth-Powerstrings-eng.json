@@ -4,5 +4,35 @@
     "DESCRIPTIONS": [
       "You can no longer use Wild Card this turn."
     ]
+  },
+  "Elizabeth:FoolPower": {
+    "NAME": "Fool",
+    "DESCRIPTIONS": [
+      "The Fool Arcana does not mean that it can be taken lightly. NL The Fool is number zero. NL It is the void from which all other things begin."
+    ]
+  },
+  "Elizabeth:MagicianPower": {
+    "NAME": "Magician",
+    "DESCRIPTIONS": [
+      "Attaining one's dream requires a stern will and unfailing determination."
+    ]
+  },
+  "Elizabeth:PriestessPower": {
+    "NAME": "Priestess",
+    "DESCRIPTIONS": [
+      "The silent voice within one's heart whispers the most profound wisdom."
+    ]
+  },
+  "Elizabeth:EmpressPower": {
+    "NAME": "Empress",
+    "DESCRIPTIONS": [
+      "Celebrate life's grandeur...its brilliance...its magnificence..."
+    ]
+  },
+  "Elizabeth:EmperorPower": {
+    "NAME": "Emperor",
+    "DESCRIPTIONS": [
+      "Only courage in the face of doubt can lead one to the answer..."
+    ]
   }
 }

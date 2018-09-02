@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ShopScreenPatch {
 
     @SpirePostfixPatch
-    public static void Postfix(ShopScreen __instance) {
+    public static void Postfix(ShopScreen __instance, ArrayList<AbstractCard> list1, ArrayList<AbstractCard> list2) {
         ArrayList<AbstractCard> reflectedList = (ArrayList<AbstractCard>)ReflectionHacks.getPrivate(__instance,
                 ShopScreen.class, "coloredCards");
         for (AbstractCard c : reflectedList) {

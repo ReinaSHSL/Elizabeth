@@ -13,15 +13,14 @@
   },
   "Elizabeth:Priestess": {
     "NAME": "Priestess",
-    "DESCRIPTION": "Gain ",
-    "EXTENDED_DESCRIPTION": " Block."
+    "DESCRIPTION": "Gain !B! Block."
   },
-  "Elizabeth:WildCard": {
-    "NAME": "Wild Card",
-    "DESCRIPTION": "Switch Arcana. NL Soulbound. NL You can only use Wild Card once per turn."
+  "Elizabeth:Empress": {
+    "NAME": "Empress",
+    "DESCRIPTION": "Gain 1 Dex. Lose it upon Arcana Switch"
   },
-  "Elizabeth:WildCard": {
-    "NAME": "Wild Card",
-    "DESCRIPTION": "Switch Arcana. NL Soulbound. NL You can only use Wild Card once per turn."
-  },
+  "Elizabeth:Emperor": {
+    "NAME": "Emperor",
+    "DESCRIPTION": "Apply 1 Authority"
+  }
 }
