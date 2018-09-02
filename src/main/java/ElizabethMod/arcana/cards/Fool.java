@@ -5,6 +5,7 @@ import ElizabethMod.arcana.powers.FoolPower;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -23,7 +24,7 @@ public class Fool extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaPower = new FoolPower();
+        this.arcanaPower = new FoolPower(AbstractDungeon.player);
         this.arcanaString = "Fool";
     }
 

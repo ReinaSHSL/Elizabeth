@@ -57,11 +57,6 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
                 ATTACK_VELVETBLUE, SKILL_VELVETBLUE, POWER_VELVETBLUE, ENERGY_ORB_VELVETBLUE,
                 ATTACK_VELVETBLUE_PORTRAIT, SKILL_VELVETBLUE_PORTRAIT, POWER_VELVETBLUE_PORTRAIT,
                 ENERGY_ORB_VELVETBLUE_PORTRAIT);
-        arcanaList.add(new Fool());
-        arcanaList.add(new Magician());
-        arcanaList.add(new Priestess());
-        arcanaList.add(new Empress());
-        arcanaList.add(new Emperor());
     }
 
     public static void initialize() {
@@ -80,6 +75,11 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new WildCard());
+        arcanaList.add(new Fool());
+        arcanaList.add(new Magician());
+        arcanaList.add(new Priestess());
+        arcanaList.add(new Empress());
+        arcanaList.add(new Emperor());
     }
 
     @Override

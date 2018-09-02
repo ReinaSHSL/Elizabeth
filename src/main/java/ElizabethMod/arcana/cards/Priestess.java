@@ -18,7 +18,7 @@ public class Priestess extends AbstractArcanaCard {
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final String IMG_PATH = "ElizabethImgs/cards/Priestess.png";
-    private static final int COST = 0;
+    private static final int COST = 2;
     private static final CardRarity rarity = CardRarity.SPECIAL;
     private static final CardTarget target = CardTarget.SELF;
 
@@ -26,7 +26,7 @@ public class Priestess extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaPower = new PriestessPower();
+        this.arcanaPower = new PriestessPower(AbstractDungeon.player);
         this.arcanaString = "Priestess";
         this.block = this.baseBlock = 5;
     }

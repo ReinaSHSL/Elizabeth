@@ -8,7 +8,9 @@
   "Elizabeth:FoolPower": {
     "NAME": "Fool",
     "DESCRIPTIONS": [
-      "The Fool Arcana does not mean that it can be taken lightly. NL The Fool is number zero. NL It is the void from which all other things begin."
+      "The next ",
+      " Arcana cards have their Bonus enabled.",
+      "The Fool Arcana does not mean that it can be taken lightly. The Fool is number zero. It is the void from which all other things begin."
     ]
   },
   "Elizabeth:MagicianPower": {

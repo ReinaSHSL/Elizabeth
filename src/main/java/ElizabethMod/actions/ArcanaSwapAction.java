@@ -24,6 +24,7 @@ public class ArcanaSwapAction extends AbstractGameAction {
     public ArcanaSwapAction(AbstractPlayer p) {
         this.p = p;
         this.duration = Settings.ACTION_DUR_FAST;
+        this.amount = 1;
     }
 
     @Override
@@ -52,9 +53,14 @@ public class ArcanaSwapAction extends AbstractGameAction {
                     switch (((AbstractArcanaCard) c).arcanaString) {
                         case "Emperor":
                             new TargetAction(((AbstractArcanaCard) c).arcanaString, 1);
+                            this.isDone = true;
+                            break;
+                        default:
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, card.arcanaPower));
+                            this.isDone = true;
+                            break;
+
                     }
-                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, card.arcanaPower));
-                    this.isDone = true;
                 }
 
             }

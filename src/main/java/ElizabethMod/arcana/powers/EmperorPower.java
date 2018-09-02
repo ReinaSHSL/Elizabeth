@@ -3,6 +3,8 @@ package ElizabethMod.arcana.powers;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -15,9 +17,10 @@ public class EmperorPower extends AbstractArcanaPower {
     private static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
 
-    public EmperorPower() {
+    public EmperorPower(AbstractCreature owner) {
         this.name = NAME;
         this.ID = POWER_ID;
+        this.owner = owner;
         updateDescription();
         this.img = getEmperorPowerTexture();
         this.canGoNegative = false;
