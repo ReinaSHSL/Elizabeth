@@ -47,7 +47,6 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     private static final String Elizabeth_Button = "ElizabethImgs/char/ElizabethButton.png";
 
     public static ArrayList<AbstractArcanaCard> arcanaList = new ArrayList<>();
-    public static ArrayList<AbstractCard> screenCards = new ArrayList<>();
     public static AllOutAttackChoiceScreen aoas;
     public static ArrayList<AbstractPersonaCard> compendium = new ArrayList<>();
     public static ArrayList<AbstractCard> listOfBasicPersona = new ArrayList<>();
@@ -78,8 +77,6 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new WildCard());
-        screenCards.add(new AllOutAttackYes());
-        screenCards.add(new AllOutAttackNo());
         arcanaList.add(new Fool());
         arcanaList.add(new Magician());
         arcanaList.add(new Priestess());

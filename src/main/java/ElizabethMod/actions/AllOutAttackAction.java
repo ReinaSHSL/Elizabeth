@@ -22,9 +22,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import java.util.ArrayList;
 
 public class AllOutAttackAction extends AbstractGameAction implements ModalChoice.Callback{
-    private ArrayList<AbstractCard> list = new ArrayList<>();
-    private boolean allOutAttackChoice;
-    private SpriteBatch sb;
     private ModalChoice modal;
 
     public AllOutAttackAction() {
@@ -39,29 +36,12 @@ public class AllOutAttackAction extends AbstractGameAction implements ModalChoic
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             modal.open();
-            tickDuration();
+            this.isDone = true;
         }
-    }
-
-    private void allOutAttack() {
-        float y = Settings.HEIGHT - 300F * Settings.scale;
-        float x = Settings.WIDTH / 2F;
-        Texture cutIn = new Texture("ElizabethImgs/powers/DownedPower.png");
-        sb.draw(cutIn, x, y,
-                556.0f, 119.0f, 1112.0f, 238.0f, Settings.scale, Settings.scale,
-                0.0f, 0, 0, 1112, 238, false, false);
     }
 
     @Override
     public void optionSelected(AbstractPlayer abstractPlayer, AbstractMonster abstractMonster, int i) {
-        switch(i){
-            case 0:
-                allOutAttack();
-            case 1:
-                break;
-            default:
-                System.out.println("UPDATE BODY TEXT");
-                break;
-        }
+        this.isDone = true;
     }
 }

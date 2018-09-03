@@ -1,5 +1,7 @@
 package ElizabethMod.cards.screencards;
 
+import ElizabethMod.actions.AllOutAttackAction;
+import ElizabethMod.actions.AllOutAttackAttackAction;
 import ElizabethMod.enums.AbstractCardEnum;
 import basemod.abstracts.CustomCard;
 import basemod.interfaces.PostDrawSubscriber;
@@ -29,6 +31,7 @@ public class AllOutAttackYes extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        AbstractDungeon.actionManager.addToBottom(new AllOutAttackAttackAction());
     }
 
     @Override
