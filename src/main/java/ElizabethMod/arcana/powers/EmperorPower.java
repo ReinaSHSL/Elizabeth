@@ -3,6 +3,7 @@ package ElizabethMod.arcana.powers;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -28,6 +29,7 @@ public class EmperorPower extends AbstractArcanaPower {
 
     @Override
     public void onInitialApplication() {
+        AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(-2));
     }
 
     @Override

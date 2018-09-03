@@ -1,6 +1,7 @@
 package ElizabethMod.powers;
 
 import ElizabethMod.actions.AllOutAttackAction;
+import ElizabethMod.actions.StunMonsterAction;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -55,6 +56,7 @@ public class DownedPower extends AbstractPower {
 
     @Override
     public void onInitialApplication() {
+        AbstractDungeon.actionManager.addToBottom(new StunMonsterAction((AbstractMonster)this.owner, AbstractDungeon.player));
         int downedCount = 0;
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (mo.hasPower(DownedPower.POWER_ID)) {

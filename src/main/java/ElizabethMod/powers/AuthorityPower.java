@@ -40,8 +40,8 @@ public class AuthorityPower extends AbstractPower {
 
     @Override
     public void onSpecificTrigger() {
+        AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, ID));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new DownedPower((AbstractMonster) this.owner)));
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, ID));
     }
 
     private static Texture getAuthorityPowerTexture() {

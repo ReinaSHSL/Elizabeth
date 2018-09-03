@@ -50,6 +50,8 @@ public class ArcanaSwapAction extends AbstractGameAction {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     switch (((AbstractArcanaCard) c).arcanaString) {
                         case "Emperor":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new EmperorPower(AbstractDungeon.player)));
                             new TargetAction("Emperor", 1);
                             this.isDone = true;
                             break;

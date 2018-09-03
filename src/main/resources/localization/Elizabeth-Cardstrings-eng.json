@@ -1,7 +1,7 @@
 {
   "Elizabeth:WildCard": {
     "NAME": "Wild Card",
-    "DESCRIPTION": "Switch Arcana. NL Soulbound. NL You can only use Wild Card once per turn."
+    "DESCRIPTION": "Switch Arcana. NL Soulbound. NL Retain. NL You can only use Wild Card once per turn."
   },
   "Elizabeth:Fool": {
     "NAME": "Fool",
@@ -17,11 +17,11 @@
   },
   "Elizabeth:Empress": {
     "NAME": "Empress",
-    "DESCRIPTION": "Gain 1 Dex. Lose it upon Arcana Switch"
+    "DESCRIPTION": "Gain 1 Dex. NL Lose it upon Arcana Switch."
   },
   "Elizabeth:Emperor": {
     "NAME": "Emperor",
-    "DESCRIPTION": "Apply 1 Authority"
+    "DESCRIPTION": "Apply 1 Authority. NL Lose [R] [R]."
   },
   "Elizabeth:AllOutAttackYes": {
     "NAME": "Attack",

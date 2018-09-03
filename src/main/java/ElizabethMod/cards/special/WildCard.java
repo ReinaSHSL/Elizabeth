@@ -29,6 +29,13 @@ public class WildCard extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
+        this.retain = true;
+    }
+
+    @Override
+    public void applyPowers(){
+        super.applyPowers();
+        this.retain = true;
     }
 
     @Override
