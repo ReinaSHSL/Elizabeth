@@ -2,6 +2,7 @@ package ElizabethMod.character;
 
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.enums.ElizabethEnum;
+import basemod.BaseMod;
 import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
 import basemod.interfaces.OnStartBattleSubscriber;
@@ -16,7 +17,7 @@ import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
 import java.util.ArrayList;
 
-public class Elizabeth extends CustomPlayer {
+public class Elizabeth extends CustomPlayer implements OnStartBattleSubscriber{
     public static final int ENERGY_PER_TURN = 3;
     public static final String MY_CHARACTER_SHOULDER_2 = "ElizabethImgs/char/shoulder2.png"; // campfire pose
     public static final String MY_CHARACTER_SHOULDER_1 = "ElizabethImgs/char/shoulder.png"; // another campfire pose
@@ -36,6 +37,7 @@ public class Elizabeth extends CustomPlayer {
         if (Settings.dailyModsEnabled() && DailyMods.cardMods.get("Diverse")) {
             this.masterMaxOrbs = 1;
         }
+        BaseMod.subscribe(this);
     }
 
     public static ArrayList<String> getStartingDeck() {
@@ -58,6 +60,13 @@ public class Elizabeth extends CustomPlayer {
         return new CharSelectInfo("Elizabeth", "An attendant of the Velvet Room. NL Uses Persona fusion and magic to ascend through the Spire.",
                 STARTING_HP, MAX_HP, 0, STARTING_GOLD, HAND_SIZE,
                 ElizabethEnum.ATTENDANT, getStartingRelics(), getStartingDeck(), false);
+    }
+
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        if (AbstractDungeon.player instanceof Elizabeth) {
+            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new WildCard()));
+        }
     }
 
 }

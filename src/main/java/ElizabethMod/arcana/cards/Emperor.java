@@ -27,7 +27,6 @@ public class Emperor extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaPower = new EmperorPower(AbstractDungeon.player);
         this.arcanaString = "Emperor";
     }
 

@@ -27,7 +27,6 @@ public class Empress extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaPower = new EmpressPower(AbstractDungeon.player);
         this.arcanaString = "Empress";
     }
 

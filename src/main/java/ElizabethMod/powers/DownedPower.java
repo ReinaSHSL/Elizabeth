@@ -3,6 +3,7 @@ package ElizabethMod.powers;
 import ElizabethMod.actions.AllOutAttackAction;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -14,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class DownedPower extends AbstractPower {
-    public static final String POWER_ID = "Elizabeth:Downed";
+    public static final String POWER_ID = "Elizabeth:DownedPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
@@ -31,39 +32,25 @@ public class DownedPower extends AbstractPower {
         updateDescription();
         img = ImageMaster.loadImage("ElizabethImgs/powers/DownedPower.png");
 
-        moveByte = owner.nextMove;
-        moveIntent = owner.intent;
+        if (this.owner instanceof AbstractMonster) {
+            moveByte = owner.nextMove;
+            moveIntent = owner.intent;
+        }
     }
 
     @Override
     public void updateDescription() {
-        description = DESCRIPTIONS[0] + amount;
-        if (amount == 1) {
-            description += DESCRIPTIONS[1];
-        } else {
-            description += DESCRIPTIONS[2];
-        }
+        description = DESCRIPTIONS[0];
     }
 
     @Override
-    public void atEndOfRound() {
-        reducePower(1);
-        if (amount <= 0) {
-            if (owner instanceof AbstractMonster) {
-                AbstractMonster m = (AbstractMonster) owner;
-                m.setMove(moveByte, moveIntent);
-                m.createIntent();
-            }
-            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
+    public void atStartOfTurn() {
+        if (owner instanceof AbstractMonster) {
+            AbstractMonster m = (AbstractMonster) owner;
+            m.setMove(moveByte, moveIntent);
+            m.createIntent();
         }
-    }
-
-    @Override
-    public int onAttacked(DamageInfo info, int damageAmount) {
-        if (info.type == DamageInfo.DamageType.NORMAL) {
-            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, AbstractDungeon.player, this.ID));
-        }
-        return damageAmount;
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
     }
 
     @Override

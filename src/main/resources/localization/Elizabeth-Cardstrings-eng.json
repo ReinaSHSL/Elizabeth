@@ -5,7 +5,7 @@
   },
   "Elizabeth:Fool": {
     "NAME": "Fool",
-    "DESCRIPTION": "Play the bonus of the first Persona 2 cards you play this turn."
+    "DESCRIPTION": "Play the bonus of the first 2 Persona cards you play this turn."
   },
   "Elizabeth:Magician": {
     "NAME": "Magician",
@@ -22,5 +22,14 @@
   "Elizabeth:Emperor": {
     "NAME": "Emperor",
     "DESCRIPTION": "Apply 1 Authority"
+  },
+  "Elizabeth:AllOutAttackYes": {
+    "NAME": "Attack",
+    "DESCRIPTION": "All Out Attack!"
+  },
+  "Elizabeth:AllOutAttackNo": {
+    "NAME": "Relent",
+    "DESCRIPTION": "Continue as normal."
   }
+
 }

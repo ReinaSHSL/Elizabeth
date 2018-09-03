@@ -26,7 +26,6 @@ public class Priestess extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaPower = new PriestessPower(AbstractDungeon.player);
         this.arcanaString = "Priestess";
         this.block = this.baseBlock = 5;
     }

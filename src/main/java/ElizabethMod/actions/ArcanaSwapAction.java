@@ -1,9 +1,8 @@
 package ElizabethMod.actions;
 
 import ElizabethMod.ElizabethModInitializer;
-import ElizabethMod.arcana.powers.AbstractArcanaPower;
+import ElizabethMod.arcana.powers.*;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
-import ElizabethMod.arcana.powers.EmperorPower;
 import ElizabethMod.powers.AuthorityPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -49,15 +48,32 @@ public class ArcanaSwapAction extends AbstractGameAction {
         } else {
             if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
-                    card = (AbstractArcanaCard)c;
                     switch (((AbstractArcanaCard) c).arcanaString) {
                         case "Emperor":
-                            new TargetAction(((AbstractArcanaCard) c).arcanaString, 1);
+                            new TargetAction("Emperor", 1);
+                            this.isDone = true;
+                            break;
+                        case "Fool":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new FoolPower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
+                        case "Magician":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new MagicianPower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
+                        case "Priestess":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new PriestessPower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
+                        case "Empress":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new EmpressPower(AbstractDungeon.player)));
                             this.isDone = true;
                             break;
                         default:
-                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, card.arcanaPower));
-                            this.isDone = true;
                             break;
 
                     }

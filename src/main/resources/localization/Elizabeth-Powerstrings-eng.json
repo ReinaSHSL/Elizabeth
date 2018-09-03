@@ -36,5 +36,17 @@
     "DESCRIPTIONS": [
       "Only courage in the face of doubt can lead one to the answer..."
     ]
+  },
+  "Elizabeth:AuthorityPower": {
+    "NAME": "Authority",
+    "DESCRIPTIONS": [
+      "Applying a Debuff will Down this enemy."
+    ]
+  },
+  "Elizabeth:DownedPower": {
+    "NAME": "Downed",
+    "DESCRIPTIONS": [
+      "This enemy takes 25% more damage and cannot act this turn. Become Undowned at the start of next turn."
+    ]
   }
 }

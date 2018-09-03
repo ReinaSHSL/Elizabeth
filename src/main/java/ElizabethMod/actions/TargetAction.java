@@ -3,6 +3,7 @@ package ElizabethMod.actions;
 import ElizabethMod.arcana.powers.EmperorPower;
 import ElizabethMod.powers.AuthorityPower;
 import basemod.BaseMod;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +27,7 @@ public class TargetAction implements RenderSubscriber, PostUpdateSubscriber {
 
     public TargetAction(String arcanaString, int amount)
     {
-        this.arcanaString = arcanaString;
+        TargetAction.arcanaString = arcanaString;
         this.amount = amount;
         BaseMod.subscribe(this);
         this.isHidden = false;
@@ -51,11 +52,6 @@ public class TargetAction implements RenderSubscriber, PostUpdateSubscriber {
 
     private void updateTargetMode()
     {
-        if ((InputHelper.justClickedRight) || (AbstractDungeon.isScreenUp) || (InputHelper.mY > Settings.HEIGHT - 80.0F * Settings.scale) || (AbstractDungeon.player.hoveredCard != null) || (InputHelper.mY < 140.0F * Settings.scale)) {
-            com.megacrit.cardcrawl.core.GameCursor.hidden = false;
-            close();
-        }
-
         this.hoveredCreature = null;
         for (AbstractCreature m : AbstractDungeon.getMonsters().monsters) {
             if ((m.hb.hovered) && (!m.isDying)) {
@@ -63,27 +59,23 @@ public class TargetAction implements RenderSubscriber, PostUpdateSubscriber {
                 break;
             }
         }
-        AbstractMonster m = null;
+        AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.monsters.get(0);
         if ((m.hb.hovered) && (!m.isDying)) {
             this.hoveredCreature = m;
         }
 
         if (InputHelper.justClickedLeft) {
             InputHelper.justClickedLeft = false;
-            AbstractPower power = null;
             if (this.hoveredCreature != null) {
                 switch (arcanaString) {
                     case "Emperor":
-                        power = new AuthorityPower(m);
+                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, AbstractDungeon.player, new AuthorityPower(m)));
                         com.megacrit.cardcrawl.core.GameCursor.hidden = false;
                         close();
                         break;
                     default:
                         break;
                 }
-            }
-            if (power != null) {
-                AbstractDungeon.actionManager.addToBottom(new com.megacrit.cardcrawl.actions.common.ApplyPowerAction(hoveredCreature, AbstractDungeon.player, power));
             }
         }
     }

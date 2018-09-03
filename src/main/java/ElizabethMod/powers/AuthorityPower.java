@@ -3,6 +3,8 @@ package ElizabethMod.powers;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -14,13 +16,12 @@ public class AuthorityPower extends AbstractPower {
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     private static final String NAME = powerStrings.NAME;
     private static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-    private AbstractMonster m;
 
 
-    public AuthorityPower(AbstractMonster owner) {
+    public AuthorityPower(AbstractCreature owner) {
         this.name = NAME;
         this.ID = POWER_ID;
-        this.m = owner;
+        this.owner = owner;
         updateDescription();
         this.img = getAuthorityPowerTexture();
         this.canGoNegative = false;
@@ -39,8 +40,8 @@ public class AuthorityPower extends AbstractPower {
 
     @Override
     public void onSpecificTrigger() {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new DownedPower(this.m)));
-        AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(this.owner, this.owner, ID, 1));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new DownedPower((AbstractMonster) this.owner)));
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, this.owner, ID));
     }
 
     private static Texture getAuthorityPowerTexture() {

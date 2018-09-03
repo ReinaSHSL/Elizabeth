@@ -24,7 +24,6 @@ public class Fool extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaPower = new FoolPower(AbstractDungeon.player);
         this.arcanaString = "Fool";
     }
 

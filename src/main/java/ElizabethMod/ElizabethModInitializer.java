@@ -2,6 +2,8 @@ package ElizabethMod;
 
 import ElizabethMod.arcana.cards.*;
 import ElizabethMod.cards.AbstractPersonaCard;
+import ElizabethMod.cards.screencards.AllOutAttackNo;
+import ElizabethMod.cards.screencards.AllOutAttackYes;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 
 @SpireInitializer
 public class ElizabethModInitializer implements EditCharactersSubscriber, EditCardsSubscriber, EditKeywordsSubscriber,
-        EditStringsSubscriber, OnStartBattleSubscriber {
+        EditStringsSubscriber {
     private static final String MODNAME = "Elizabeth";
     private static final String AUTHOR = "Reina";
     private static final String DESCRIPTION = "Adds Elizabeth as a playable character.";
@@ -45,10 +47,11 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     private static final String Elizabeth_Button = "ElizabethImgs/char/ElizabethButton.png";
 
     public static ArrayList<AbstractArcanaCard> arcanaList = new ArrayList<>();
+    public static ArrayList<AbstractCard> screenCards = new ArrayList<>();
     public static AllOutAttackChoiceScreen aoas;
     public static ArrayList<AbstractPersonaCard> compendium = new ArrayList<>();
     public static ArrayList<AbstractCard> listOfBasicPersona = new ArrayList<>();
-    public static PersonaFusionScreen personaFusionScreen = new PersonaFusionScreen();
+    public static PersonaFusionScreen personaFusionScreen;
 
     public ElizabethModInitializer() {
         BaseMod.subscribe(this);
@@ -66,15 +69,17 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
 
     @Override
     public void receiveEditCharacters() {
-        BaseMod.addCharacter(Elizabeth.class,  "The Attendant", "ATTENDANT",
+        BaseMod.addCharacter(Elizabeth.class, "The Attendant", "ATTENDANT",
                 AbstractCardEnum.VELVET_BLUE, "Elizabeth",
-                Elizabeth_Button , Elizabeth_Portrait,
+                Elizabeth_Button, Elizabeth_Portrait,
                 ElizabethEnum.ATTENDANT);
     }
 
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new WildCard());
+        screenCards.add(new AllOutAttackYes());
+        screenCards.add(new AllOutAttackNo());
         arcanaList.add(new Fool());
         arcanaList.add(new Magician());
         arcanaList.add(new Priestess());
@@ -85,7 +90,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     @Override
     public void receiveEditKeywords() {
         String[] Soulbound = {"soulbound"};
-        BaseMod.addKeyword(Soulbound,"Cannot be removed from your hand.");
+        BaseMod.addKeyword(Soulbound, "Cannot be removed from your hand.");
     }
 
     @Override
@@ -99,12 +104,5 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         String cardStrings = Gdx.files.internal("localization/Elizabeth-Cardstrings-eng.json").readString(
                 String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(CardStrings.class, cardStrings);
-    }
-
-    @Override
-    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-        if (AbstractDungeon.player instanceof Elizabeth) {
-            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new WildCard()));
-        }
     }
 }

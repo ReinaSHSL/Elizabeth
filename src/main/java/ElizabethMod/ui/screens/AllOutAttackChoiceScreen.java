@@ -43,7 +43,7 @@ public class AllOutAttackChoiceScreen extends CardRewardScreen {
         this.rItem = null;
         this.codex = false;
         this.draft = false;
-        this.header = "";
+        this.header = "Here's our chance for an All Out Attack!";
         this.skipButton = new SkipCardButton();
         this.bowlButton = new SingingBowlButton();
         this.draftCount = 0;
