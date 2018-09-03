@@ -28,6 +28,7 @@ public class AllOutAttackAction extends AbstractGameAction implements ModalChoic
         this.duration = Settings.ACTION_DUR_FAST;
         modal = new ModalChoiceBuilder()
                 .setCallback(this)
+                .setTitle("Here's our chance for an All Out Attack!")
                 .addOption(new AllOutAttackYes ())
                 .addOption(new AllOutAttackNo())
                 .create();

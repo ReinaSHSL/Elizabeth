@@ -9,9 +9,9 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 public class AoaCutIn extends AbstractGameEffect {
-    private float x = -1920;
-    private float vX2 = 10000;
-    private float vX = 19000;
+    private float x = -1920 * Settings.scale;
+    private float vX2 = 10000 * Settings.scale;
+    private float vX = 19000 * Settings.scale;
 
     public AoaCutIn() {
         this.renderBehind = false;
@@ -24,13 +24,16 @@ public class AoaCutIn extends AbstractGameEffect {
         if (this.duration < 0.0f) {
             this.isDone = true;
         }
-        if (this.duration > 0.8) {
+        else if (this.duration > 0.8) {
             this.x += this.vX2 * Gdx.graphics.getDeltaTime();
         }
-        if (this.duration < 0.3) {
+        else if (this.duration < 0.3) {
             this.x += this.vX * Gdx.graphics.getDeltaTime();
         }
-
+        else
+        {
+            this.x = 0f;
+        }
     }
 
     @Override

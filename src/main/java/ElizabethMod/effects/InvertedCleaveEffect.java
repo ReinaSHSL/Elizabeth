@@ -38,7 +38,7 @@ public class InvertedCleaveEffect extends AbstractGameEffect {
         this.fadeOutTimer = 0.4f;
         this.img = ImageMaster.vfxAtlas.findRegion("combat/cleave");
         this.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-        this.x = Settings.WIDTH * 0.9f - this.img.packedWidth / 2.0f;
+        this.x = Settings.WIDTH * 0.8f - this.img.packedWidth / 2.0f;
         this.y = AbstractDungeon.floorY + 100.0f * Settings.scale - this.img.packedHeight / 2.0f;
         this.vX = -100.0f * Settings.scale;
         this.stallTimer = MathUtils.random(0.0f, 0.2f);
