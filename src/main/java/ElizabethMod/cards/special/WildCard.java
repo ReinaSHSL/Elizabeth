@@ -7,6 +7,7 @@ import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.defect.DiscardPileToHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -31,6 +32,7 @@ public class WildCard extends CustomCard {
                 rarity, target);
         this.retain = true;
     }
+
 
     @Override
     public void applyPowers(){
@@ -60,6 +62,12 @@ public class WildCard extends CustomCard {
     @Override
     public void triggerOnExhaust() {
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(this.makeCopy()));
+    }
+
+    @Override
+    public void triggerOnManualDiscard() {
+        AbstractDungeon.player.discardPile.removeCard(this);
+        AbstractDungeon.player.hand.addToHand(this);
     }
 
     @Override

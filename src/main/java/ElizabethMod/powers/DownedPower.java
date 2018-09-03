@@ -45,6 +45,15 @@ public class DownedPower extends AbstractPower {
     }
 
     @Override
+    public void onRemove() {
+        if (owner instanceof AbstractMonster) {
+            AbstractMonster m = (AbstractMonster) owner;
+            m.setMove(moveByte, moveIntent);
+            m.createIntent();
+        }
+    }
+
+    @Override
     public void atStartOfTurn() {
         if (owner instanceof AbstractMonster) {
             AbstractMonster m = (AbstractMonster) owner;
@@ -70,9 +79,9 @@ public class DownedPower extends AbstractPower {
 
     @Override
     public float atDamageReceive(float damage, DamageInfo.DamageType type) {
-        if (type == DamageInfo.DamageType.NORMAL) {
-            return damage * 1.25F;
+        if (type != DamageInfo.DamageType.NORMAL) {
+            return damage;
         }
-        return damage;
+        return damage * 1.25F;
     }
 }

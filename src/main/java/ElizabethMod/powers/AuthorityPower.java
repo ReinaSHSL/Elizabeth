@@ -24,6 +24,7 @@ public class AuthorityPower extends AbstractPower {
         this.owner = owner;
         updateDescription();
         this.img = getAuthorityPowerTexture();
+        this.type = PowerType.DEBUFF;
         this.canGoNegative = false;
     }
 
@@ -40,6 +41,7 @@ public class AuthorityPower extends AbstractPower {
 
     @Override
     public void onSpecificTrigger() {
+        System.out.println("Authority");
         AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, ID));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new DownedPower((AbstractMonster) this.owner)));
     }
