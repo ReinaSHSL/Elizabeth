@@ -21,9 +21,6 @@ public class PersonaFusionScreen {
 
     private ArrayList<Hitbox> hbs = new ArrayList<Hitbox>();
     private boolean justClicked = false;
-    private boolean justClickedRight = false;
-    private float completedAlpha = 0f;
-    private float completedSin = 0f;
     private float yScale;
 
     public boolean openedDuringReward;
@@ -44,7 +41,6 @@ public class PersonaFusionScreen {
         else {
             CardCrawlGame.sound.play("MAP_OPEN_2", 0.1f);
         }
-
         hbs.clear();
 
         this.yScale = 0.0f;
@@ -65,7 +61,6 @@ public class PersonaFusionScreen {
         yScale = MathHelper.scaleLerpSnap(yScale, 1.0f);
         this.renderBanner(sb);
         justClicked = false;
-        justClickedRight = false;
     }
 
     public void update() {

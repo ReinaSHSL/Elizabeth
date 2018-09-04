@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 @SpirePatch(
-        cls= "com.megacrit.cardcrawl.actions.common.ApplyPowerAction",
+        clz= ApplyPowerAction.class,
         method="update"
 )
 public class ApplyPowerActionPatch {

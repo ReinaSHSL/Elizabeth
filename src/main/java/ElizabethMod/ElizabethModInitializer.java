@@ -2,26 +2,20 @@ package ElizabethMod;
 
 import ElizabethMod.arcana.cards.*;
 import ElizabethMod.cards.AbstractPersonaCard;
-import ElizabethMod.cards.screencards.AllOutAttackNo;
-import ElizabethMod.cards.screencards.AllOutAttackYes;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.enums.ElizabethEnum;
-import ElizabethMod.ui.screens.AllOutAttackChoiceScreen;
 import ElizabethMod.ui.screens.PersonaFusionScreen;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -47,10 +41,9 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     private static final String Elizabeth_Button = "ElizabethImgs/char/ElizabethButton.png";
 
     public static ArrayList<AbstractArcanaCard> arcanaList = new ArrayList<>();
-    public static AllOutAttackChoiceScreen aoas;
     public static ArrayList<AbstractPersonaCard> compendium = new ArrayList<>();
     public static ArrayList<AbstractCard> listOfBasicPersona = new ArrayList<>();
-    public static PersonaFusionScreen personaFusionScreen;
+    public static PersonaFusionScreen personaFusionScreen = new PersonaFusionScreen();
 
     public ElizabethModInitializer() {
         BaseMod.subscribe(this);

@@ -2,6 +2,7 @@ package ElizabethMod.ui.buttons;
 
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.patches.ScreenStatePatch;
+import ElizabethMod.tools.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,31 +27,21 @@ public class PersonaFusionButton {
     public static void renderPersonaFusionButton(SpriteBatch sb) {
         sb.setColor(Color.WHITE);
 
-        Texture texture = new Texture("ElizabethImgs/ui/buttons/personaFusionIcon.png");
+        Texture texture = TextureLoader.getTexture("ElizabethImgs/ui/buttons/personaFusionIcon.png");
 
-        if(AbstractDungeon.screen != AbstractDungeon.CurrentScreen.MAP) {
+        sb.draw(texture, xPos - padding, yPos, size / 2f, size / 2f, size, size, 1f, 1f, rotation, 0, 0, 64, 64, false, false);
+        if (hb.hovered) {
+            sb.setBlendFunction(770, 1);
+            sb.setColor(new Color(1.0f, 1.0f, 1.0f, 0.25f));
             sb.draw(texture, xPos - padding, yPos, size / 2f, size / 2f, size, size, 1f, 1f, rotation, 0, 0, 64, 64, false, false);
-            if (hb.hovered) {
-                sb.setBlendFunction(770, 1);
-                sb.setColor(new Color(1.0f, 1.0f, 1.0f, 0.25f));
-                sb.draw(texture, xPos - padding, yPos, size / 2f, size / 2f, size, size, 1f, 1f, rotation, 0, 0, 64, 64, false, false);
-                sb.setBlendFunction(770, 771);
-
-
-                renderToolTip(sb);
-            }
+            sb.setBlendFunction(770, 771);
+            renderToolTip(sb);
         }
         hb.render(sb);
     }
 
     public static void updatePersonaFusionButton() {
         hb.update();
-
-        if(hb.hovered) {
-            rotation = MathHelper.angleLerpSnap(rotation, 15.0f);
-        } else {
-            rotation = MathHelper.angleLerpSnap(rotation, 0.0f);
-        }
 
         if(AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP) return;
 
@@ -131,7 +122,7 @@ public class PersonaFusionButton {
 
     public static void renderToolTip(SpriteBatch sb){
         sb.setColor(Color.CYAN);
-        TipHelper.renderGenericTip(xPos - padding, tipYPos, "Quest Log", "View the currently active quests.");
+        TipHelper.renderGenericTip(xPos - padding, tipYPos, "Velvet Room", "Fuse and purchase Persona.");
     }
 
     public static void onClick() {
