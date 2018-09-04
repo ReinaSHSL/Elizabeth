@@ -2,6 +2,8 @@ package ElizabethMod.patches;
 
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.enums.ElizabethEnum;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
@@ -26,6 +28,16 @@ public class AbstractDungeonPatch {
                 }
             }
         }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "render")
+    public static class Render {
+
+        @SpireInsertPatch(rloc = 111) //112
+        public static void Insert(AbstractDungeon __instance, SpriteBatch sb) {
+            if(AbstractDungeon.screen == ScreenStatePatch.PERSONA_FUSION_SCREEN)
+                ElizabethModInitializer.personaFusionScreen.render(sb);
+        }
+    }
 
         @SpirePatch(clz = AbstractDungeon.class, method = "getRewardCards")
         public static class RewardsPatch {

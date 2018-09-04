@@ -3,7 +3,9 @@ package ElizabethMod.ui.screens;
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.patches.ScreenStatePatch;
+import ElizabethMod.tools.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -42,7 +44,6 @@ public class PersonaFusionScreen {
             CardCrawlGame.sound.play("MAP_OPEN_2", 0.1f);
         }
         hbs.clear();
-
         this.yScale = 0.0f;
     }
 
@@ -57,9 +58,10 @@ public class PersonaFusionScreen {
     }
 
     public void render(SpriteBatch sb) {
+        Texture velvetRoom = TextureLoader.getTexture("ElizabethImgs/ui/screens/velvetRoom.png");
         sb.setColor(Color.WHITE);
         yScale = MathHelper.scaleLerpSnap(yScale, 1.0f);
-        this.renderBanner(sb);
+        sb.draw(velvetRoom, 0, 0);
         justClicked = false;
     }
 
