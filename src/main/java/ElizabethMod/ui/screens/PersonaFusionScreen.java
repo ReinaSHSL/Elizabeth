@@ -2,12 +2,16 @@ package ElizabethMod.ui.screens;
 
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.cards.AbstractPersonaCard;
+import ElizabethMod.cards.screencards.AllOutAttackNo;
+import ElizabethMod.cards.screencards.AllOutAttackYes;
+import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.patches.ScreenStatePatch;
 import ElizabethMod.tools.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -24,8 +28,9 @@ public class PersonaFusionScreen {
     private ArrayList<Hitbox> hbs = new ArrayList<Hitbox>();
     private boolean justClicked = false;
     private float yScale;
-
     public boolean openedDuringReward;
+    private static Hitbox personaOne;
+    private static Hitbox personaTwo;
 
     public PersonaFusionScreen() {
     }
@@ -62,7 +67,28 @@ public class PersonaFusionScreen {
         sb.setColor(Color.WHITE);
         yScale = MathHelper.scaleLerpSnap(yScale, 1.0f);
         sb.draw(velvetRoom, 0, 0);
+        renderCardPreview(sb);
         justClicked = false;
+    }
+
+    private void renderCardPreview(SpriteBatch sb) {
+        AbstractCard personaOneCard = new AllOutAttackNo().makeStatEquivalentCopy();
+        personaOneCard.drawScale = 1.0f;
+        personaOneCard.render(sb);
+        personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
+        personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
+        personaOne = new Hitbox(personaOneCard.current_x - (AbstractCard.IMG_WIDTH/2), personaOneCard.current_y - (AbstractCard.IMG_HEIGHT/2),
+                AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
+
+        personaOne.render(sb);
+        AbstractCard personaTwoCard = new WildCard().makeStatEquivalentCopy();
+        personaTwoCard.drawScale = 1.0f;
+        personaTwoCard.render(sb);
+        personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
+        personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
+        personaTwo = new Hitbox(personaTwoCard.current_x - (AbstractCard.IMG_WIDTH/2), personaTwoCard.current_y - (AbstractCard.IMG_HEIGHT/2),
+                AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
+        personaTwo.render(sb);
     }
 
     public void update() {
@@ -72,14 +98,9 @@ public class PersonaFusionScreen {
 
     }
 
-    public void renderBanner(SpriteBatch sb){
-        float y = Settings.HEIGHT - 280.0f * Settings.scale;
-
-        sb.setColor(Color.WHITE.cpy());
-        sb.draw(ImageMaster.VICTORY_BANNER, Settings.WIDTH / 2.0f - 556.0f, y - 119.0f,
-                556.0f, 119.0f, 1112.0f, 238.0f, Settings.scale, Settings.scale,
-                0.0f, 0, 0, 1112, 238, false, false);
-        FontHelper.renderFontCentered(sb, FontHelper.bannerFont, "Velvet Room", Settings.WIDTH / 2.0f,
-                y + 22.0f * Settings.scale, Color.WHITE, 1f);
+    private void updateCardPreview() {
+        if(personaOne.justHovered || personaTwo.justHovered) {
+            System.out.println("Oof");
+        }
     }
 }

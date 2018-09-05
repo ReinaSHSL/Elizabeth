@@ -10,6 +10,8 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import ElizabethMod.character.Elizabeth;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.Cauldron;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -39,17 +41,17 @@ public class AbstractDungeonPatch {
         }
     }
 
-        @SpirePatch(clz = AbstractDungeon.class, method = "getRewardCards")
-        public static class RewardsPatch {
-            public static SpireReturn<Object> Prefix() {
-                ArrayList<AbstractCard> cards = new ArrayList<>();
-                if (AbstractDungeon.player instanceof Elizabeth) {
-                    return SpireReturn.Return(cards);
-                } else {
-                    return SpireReturn.Continue();
-                }
+    @SpirePatch(clz = AbstractDungeon.class, method = "getRewardCards")
+    public static class RewardsPatch {
+        public static SpireReturn<Object> Prefix() {
+            ArrayList<AbstractCard> cards = new ArrayList<>();
+            if (AbstractDungeon.player instanceof Elizabeth) {
+                return SpireReturn.Return(cards);
+            } else {
+                return SpireReturn.Continue();
             }
         }
+    }
 
     @SpirePatch(clz=AbstractDungeon.class, method="closeCurrentScreen")
     public static class CloseCurrentScreen {
@@ -66,6 +68,16 @@ public class AbstractDungeonPatch {
                 AbstractDungeon.overlayMenu.hideBlackScreen();
                 ElizabethModInitializer.personaFusionScreen.close();
             }
+        }
+    }
+
+    @SpirePatch(clz = AbstractDungeon.class, method = "update")
+    public static class Update {
+
+        @SpireInsertPatch(rloc = 94)
+        public static void Insert(AbstractDungeon __instance) {
+            if(AbstractDungeon.screen == ScreenStatePatch.PERSONA_FUSION_SCREEN)
+              ElizabethModInitializer.personaFusionScreen.update();
         }
     }
 }

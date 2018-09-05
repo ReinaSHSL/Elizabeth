@@ -1,6 +1,7 @@
 package ElizabethMod.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.megacrit.cardcrawl.relics.Cauldron;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
@@ -23,4 +24,5 @@ public class StunMonsterPatch {
             }
         };
     }
+
 }

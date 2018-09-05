@@ -24,6 +24,7 @@ public class AbstractMonsterPatch {
                 AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction
                         (c, 1, true, false));
                 AbstractDungeon.effectsQueue.add(new FastCardObtainEffect(c, c.current_x, c.current_y));
+                ElizabethModInitializer.compendium.add((AbstractPersonaCard) c);
             }
         }
     }

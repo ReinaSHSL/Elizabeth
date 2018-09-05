@@ -1,5 +1,6 @@
 package ElizabethMod.patches;
 
+import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.ui.buttons.PersonaFusionButton;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,7 +13,9 @@ public class TopPanelRenderPatch {
     @SpirePatch(clz = TopPanel.class, method = "renderDeckIcon")
     public static class RenderDeckIcon{
         public static void Postfix(TopPanel __instance, SpriteBatch sb) {
-            PersonaFusionButton.renderPersonaFusionButton(sb);
+            if (AbstractDungeon.player instanceof Elizabeth) {
+                PersonaFusionButton.renderPersonaFusionButton(sb);
+            }
         }
     }
 
@@ -20,7 +23,9 @@ public class TopPanelRenderPatch {
     @SpirePatch(clz = TopPanel.class, method = "updateButtons")
     public static class UpdateButtons {
         public static void Postfix(TopPanel __instance) {
-            PersonaFusionButton.updatePersonaFusionButton();
+            if (AbstractDungeon.player instanceof Elizabeth) {
+                PersonaFusionButton.updatePersonaFusionButton();
+            }
         }
     }
 }

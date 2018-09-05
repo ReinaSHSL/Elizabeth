@@ -18,7 +18,7 @@ public class PersonaFusionButton {
     private static float rotation = 0f;
     private static float yPos = Settings.HEIGHT - (64f * Settings.scale);
     private static float tipYPos = Settings.HEIGHT - (120.0f * Settings.scale);
-    private static float xPos = Settings.WIDTH - (256f * Settings.scale);
+    private static float xPos = Settings.WIDTH - (425f * Settings.scale);
     private static float padding = (10.0f * Settings.scale) * 4f;
     private static float size = 64f * Settings.scale;
     private static boolean isEnabled = true;
@@ -42,8 +42,6 @@ public class PersonaFusionButton {
 
     public static void updatePersonaFusionButton() {
         hb.update();
-
-        if(AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP) return;
 
         if(hb.justHovered) {
             CardCrawlGame.sound.play("UI_HOVER");
@@ -84,11 +82,12 @@ public class PersonaFusionButton {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.SHOP;
                 ElizabethModInitializer.personaFusionScreen.open();
             }
-            else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP && !AbstractDungeon.dungeonMapScreen.dismissable) {
+            else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP) {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.MAP;
+                AbstractDungeon.closeCurrentScreen();
                 ElizabethModInitializer.personaFusionScreen.open();
             }
-            else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.SETTINGS || AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP) {
+            else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.SETTINGS) {
                 if (AbstractDungeon.previousScreen != null) {
                     AbstractDungeon.screenSwap = true;
                 }
