@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -31,11 +33,26 @@ public class PersonaFusionScreen {
     public boolean openedDuringReward;
     private static Hitbox personaOne;
     private static Hitbox personaTwo;
+    private static AbstractCard personaOneCard;
+    private static AbstractCard personaTwoCard;
 
     public PersonaFusionScreen() {
     }
 
     public void open() {
+        personaOneCard = new Strike_Blue();
+        personaOneCard.drawScale = 1.0f;
+        personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
+        personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
+        personaOne = new Hitbox(personaOneCard.current_x - (AbstractCard.IMG_WIDTH/2), personaOneCard.current_y - (AbstractCard.IMG_HEIGHT/2),
+                AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
+
+        personaTwoCard = new Strike_Blue();
+        personaTwoCard.drawScale = 1.0f;
+        personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
+        personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
+        personaTwo = new Hitbox(personaTwoCard.current_x - (AbstractCard.IMG_WIDTH/2), personaTwoCard.current_y - (AbstractCard.IMG_HEIGHT/2),
+                AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
         AbstractDungeon.player.releaseCard();
         AbstractDungeon.screen = ScreenStatePatch.PERSONA_FUSION_SCREEN;
         AbstractDungeon.overlayMenu.showBlackScreen();
@@ -72,35 +89,46 @@ public class PersonaFusionScreen {
     }
 
     private void renderCardPreview(SpriteBatch sb) {
-        AbstractCard personaOneCard = new AllOutAttackNo().makeStatEquivalentCopy();
-        personaOneCard.drawScale = 1.0f;
         personaOneCard.render(sb);
-        personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
-        personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
-        personaOne = new Hitbox(personaOneCard.current_x - (AbstractCard.IMG_WIDTH/2), personaOneCard.current_y - (AbstractCard.IMG_HEIGHT/2),
-                AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
-
         personaOne.render(sb);
-        AbstractCard personaTwoCard = new WildCard().makeStatEquivalentCopy();
-        personaTwoCard.drawScale = 1.0f;
         personaTwoCard.render(sb);
-        personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
-        personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
-        personaTwo = new Hitbox(personaTwoCard.current_x - (AbstractCard.IMG_WIDTH/2), personaTwoCard.current_y - (AbstractCard.IMG_HEIGHT/2),
-                AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
         personaTwo.render(sb);
     }
 
     public void update() {
+        personaOne.update();
+        personaTwo.update();
         if(InputHelper.justClickedLeft) {
             justClicked = true;
         }
-
+        if (personaOne.hovered) {
+            updateCardPreview(personaOne.x, personaOne.y);
+        }
+        if (personaTwo.hovered) {
+            updateCardPreview(personaTwo.x, personaTwo.y);
+        }
     }
 
-    private void updateCardPreview() {
-        if(personaOne.justHovered || personaTwo.justHovered) {
-            System.out.println("Oof");
+    private void updateCardPreview(float x, float y) {
+        if(personaOne.clicked || personaTwo.clicked) {
+            openPersonaList();
         }
+    }
+
+    private void openPersonaList() {
+        AbstractCard card;
+        CardGroup tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        for (AbstractCard c : ElizabethModInitializer.arcanaList) {
+            tmp.addToTop(c);
+        }
+        AbstractDungeon.gridSelectScreen.open(tmp, 1, "Pick a Persona to fuse.", false);
+        if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
+            for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
+                card = c;
+                card.unhover();
+                personaOneCard = card;
+            }
+        }
+        AbstractDungeon.gridSelectScreen.selectedCards.clear();
     }
 }
