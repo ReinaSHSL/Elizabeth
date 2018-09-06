@@ -1,4 +1,9 @@
 {
+  //OTHER STUFF
+  "Elizabeth:BlankPersonaCard": {
+    "NAME": "Blank",
+    "DESCRIPTION": ""
+  },
   "Elizabeth:WildCard": {
     "NAME": "Wild Card",
     "DESCRIPTION": "Switch Arcana. NL Soulbound. NL Retain. NL You can only use Wild Card once per turn."
@@ -39,10 +44,10 @@
 
   "Elizabeth:Apsaras": {
     "NAME": "Apsaras",
-    "DESCRIPTION": "Deal !D! damage. NL Bonus: Gain 1 Artifact."
+    "DESCRIPTION": "Priestess NL Deal !D! damage. NL Bonus: Gain 1 Artifact."
   },
   "Elizabeth:JackFrost": {
     "NAME": "Jack Frost",
-    "DESCRIPTION": "Deal !D! damage. NL Bonus: Freeze the enemy."
+    "DESCRIPTION": "Magician NL Deal !D! damage. NL Bonus: Freeze the enemy."
   }
 }

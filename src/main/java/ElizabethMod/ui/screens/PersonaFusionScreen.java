@@ -1,7 +1,12 @@
 package ElizabethMod.ui.screens;
 
 import ElizabethMod.ElizabethModInitializer;
+import ElizabethMod.cards.AbstractPersonaCard;
+import ElizabethMod.cards.screencards.BlankPersonaCard;
+import ElizabethMod.character.Elizabeth;
 import ElizabethMod.patches.ScreenStatePatch;
+import ElizabethMod.tools.DataParser;
+import ElizabethMod.tools.InvalidCommandException;
 import ElizabethMod.tools.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,7 +22,9 @@ import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.MathHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PersonaFusionScreen {
 
@@ -28,34 +35,38 @@ public class PersonaFusionScreen {
     private static Hitbox personaOne;
     private static Hitbox personaTwo;
     private static Hitbox personaResult;
-    private static AbstractCard personaOneCard;
-    private static AbstractCard personaTwoCard;
-    private static AbstractCard personaResultCard;
+    private static AbstractPersonaCard personaOneCard;
+    private static AbstractPersonaCard personaTwoCard;
+    private static AbstractPersonaCard personaResultCard;
     private boolean personaChange = false;
     private boolean changePersonaOne = false;
     private boolean changePersonaTwo = false;
+    private static final File dataFile = new File("resources/PersonaFusion.txt");
 
     public PersonaFusionScreen() {
     }
 
-    public void open() {
-        personaOneCard = new Strike_Blue().makeStatEquivalentCopy();
-        personaTwoCard = new Strike_Blue().makeStatEquivalentCopy();
-        personaResultCard = new Strike_Blue().makeStatEquivalentCopy();
+    public void open(boolean resetCards) {
+        System.out.println(ElizabethModInitializer.personaFusionCombinations);
+        if (resetCards) {
+            personaOneCard = new BlankPersonaCard();
+            personaTwoCard = new BlankPersonaCard();
+            personaResultCard = new BlankPersonaCard();
+        }
         personaOneCard.drawScale = 1.0f;
         personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
-        personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
-        personaOne = new Hitbox(personaOneCard.current_x - (AbstractCard.IMG_WIDTH/2), personaOneCard.current_y - (AbstractCard.IMG_HEIGHT/2),
+        personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+        personaOne = new Hitbox(personaOneCard.current_x - (AbstractCard.IMG_WIDTH / 2), personaOneCard.current_y - (AbstractCard.IMG_HEIGHT / 2),
                 AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
         personaTwoCard.drawScale = 1.0f;
         personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
-        personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
-        personaTwo = new Hitbox(personaTwoCard.current_x - (AbstractCard.IMG_WIDTH/2), personaTwoCard.current_y - (AbstractCard.IMG_HEIGHT/2),
+        personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+        personaTwo = new Hitbox(personaTwoCard.current_x - (AbstractCard.IMG_WIDTH / 2), personaTwoCard.current_y - (AbstractCard.IMG_HEIGHT / 2),
                 AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
         personaResultCard.drawScale = 1.0f;
         personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
-        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale ;
-        personaResult = new Hitbox(personaResultCard.current_x - (AbstractCard.IMG_WIDTH/2), personaResultCard.current_y - (AbstractCard.IMG_HEIGHT/2),
+        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+        personaResult = new Hitbox(personaResultCard.current_x - (AbstractCard.IMG_WIDTH / 2), personaResultCard.current_y - (AbstractCard.IMG_HEIGHT / 2),
                 AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
         AbstractDungeon.player.releaseCard();
         AbstractDungeon.screen = ScreenStatePatch.PERSONA_FUSION_SCREEN;
@@ -65,8 +76,7 @@ public class PersonaFusionScreen {
         AbstractDungeon.isScreenUp = true;
         if (MathUtils.randomBoolean()) {
             CardCrawlGame.sound.play("MAP_OPEN", 0.1f);
-        }
-        else {
+        } else {
             CardCrawlGame.sound.play("MAP_OPEN_2", 0.1f);
         }
         hbs.clear();
@@ -77,8 +87,7 @@ public class PersonaFusionScreen {
         AbstractDungeon.overlayMenu.cancelButton.hide();
         if (MathUtils.randomBoolean()) {
             CardCrawlGame.sound.play("MAP_OPEN", 0.1f);
-        }
-        else {
+        } else {
             CardCrawlGame.sound.play("MAP_OPEN_2", 0.1f);
         }
     }
@@ -104,7 +113,8 @@ public class PersonaFusionScreen {
     public void update() {
         personaOne.update();
         personaTwo.update();
-        if(InputHelper.justClickedLeft) {
+        getResultPersona();
+        if (InputHelper.justClickedLeft) {
             justClicked = true;
         }
         if (personaOne.hovered) {
@@ -116,7 +126,7 @@ public class PersonaFusionScreen {
         if (personaResult.hovered) {
             updateCardPreview(personaResultCard);
         }
-        if(personaOne.hovered && InputHelper.justClickedLeft) {
+        if (personaOne.hovered && InputHelper.justClickedLeft) {
             changePersonaOne = true;
             openPersonaList();
         }
@@ -124,11 +134,23 @@ public class PersonaFusionScreen {
             changePersonaTwo = true;
             openPersonaList();
         }
+        if (personaOne.hovered && InputHelper.justClickedRight) {
+            personaOneCard = new BlankPersonaCard();
+            personaOneCard.drawScale = 1.0f;
+            personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
+            personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+        }
+        if (personaTwo.hovered && InputHelper.justClickedRight) {
+            personaTwoCard = new BlankPersonaCard();
+            personaTwoCard.drawScale = 1.0f;
+            personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
+            personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+        }
         if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0 && this.personaChange) {
             for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                 c.unhover();
                 if (changePersonaOne) {
-                    personaOneCard = c.makeStatEquivalentCopy();
+                    personaOneCard = (AbstractPersonaCard) c;
                     personaOneCard.drawScale = 1.0f;
                     personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
                     personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
@@ -136,10 +158,10 @@ public class PersonaFusionScreen {
                     changePersonaOne = false;
                 }
                 if (changePersonaTwo) {
-                    personaTwoCard = c.makeStatEquivalentCopy();
+                    personaTwoCard = (AbstractPersonaCard) c;
                     personaTwoCard.drawScale = 1.0f;
                     personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
-                    personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale ;
+                    personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
                     personaChange = false;
                     changePersonaTwo = false;
                 }
@@ -154,10 +176,74 @@ public class PersonaFusionScreen {
     private void openPersonaList() {
         AbstractDungeon.previousScreen = ScreenStatePatch.PERSONA_FUSION_SCREEN;
         CardGroup tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        for (AbstractCard c : ElizabethModInitializer.arcanaList) {
-            tmp.addToTop(c);
+        for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+            if (c instanceof AbstractPersonaCard && personaOneCard != c && personaTwoCard != c) {
+                tmp.addToTop(c);
+            }
         }
         this.personaChange = true;
-        AbstractDungeon.gridSelectScreen.open(tmp, 1, "Pick a Persona to fuse.", false);
+        if (tmp.size() != 0) {
+            AbstractDungeon.gridSelectScreen.open(tmp, 1, "Pick a Persona to fuse.", false);
+        }
+    }
+
+
+    private AbstractPersonaCard getResultPersona() {
+        AbstractPersonaCard resultPersona = new BlankPersonaCard();
+        String resultantArcana;
+        String concatenatedArcana = personaOneCard.arcana + personaTwoCard.arcana;
+        try {
+            resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
+            System.out.println("Fail1");
+        } catch (Exception e) {
+            resultantArcana = "noCombo";
+            System.out.println("Succ");
+        }
+        if (resultantArcana.equals("noCombo")) {
+            try {
+                System.out.println("Hope succ");
+                concatenatedArcana = personaTwoCard.arcana + personaOneCard.arcana;
+                resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
+            } catch (Exception e) {
+                System.out.println("Oof");
+            }
+        }
+//        int resultantValue = personaOneCard.personaValue + personaTwoCard.personaValue;
+//        switch(resultantArcana) {
+//            case "Fool":
+//                ArrayList<AbstractPersonaCard> lesserPersonaList = new ArrayList<>();
+//                int checkValue = 0;
+//                for (AbstractPersonaCard c : ElizabethModInitializer.listOfFoolPersona) {
+//                    if (c.personaValue == resultantValue) {
+//                        resultPersona = c;
+//                        resultPersona.drawScale = 1.0f;
+//                        resultPersona.current_x = Settings.WIDTH / 2F * Settings.scale;
+//                        resultPersona.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+//                        break;
+//                    } else {
+//                        if (c.personaValue < resultantValue) {
+//                            lesserPersonaList.add(c);
+//                        }
+//                    }
+//                }
+//                if (lesserPersonaList.size() != 0) {
+//                    for (AbstractPersonaCard c : lesserPersonaList) {
+//                        if (c.personaValue > checkValue) {
+//                            checkValue = c.personaValue;
+//                        }
+//                    }
+//                    for (AbstractPersonaCard c : lesserPersonaList) {
+//                        if (c.personaValue == checkValue) {
+//                            resultPersona = c;
+//                            resultPersona.drawScale = 1.0f;
+//                            resultPersona.current_x = Settings.WIDTH / 2F * Settings.scale;
+//                            resultPersona.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+//                            break;
+//                        }
+//                    }
+//                }
+//            case "Magician":
+//        }
+        return resultPersona;
     }
 }

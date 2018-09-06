@@ -12,7 +12,7 @@ public class CancelButtonPatch {
     @SpirePostfixPatch
     public static void Postfix(CancelButton __instance) {
         if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.GRID && AbstractDungeon.previousScreen == ScreenStatePatch.PERSONA_FUSION_SCREEN) {
-            ElizabethModInitializer.personaFusionScreen.open();
+            ElizabethModInitializer.personaFusionScreen.open(false);
         }
     }
 }

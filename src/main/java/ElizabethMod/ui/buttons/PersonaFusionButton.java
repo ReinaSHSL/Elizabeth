@@ -50,11 +50,11 @@ public class PersonaFusionButton {
         if(clickedPersonaFusionButton && !CardCrawlGame.isPopupOpen) {
             if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.COMBAT_REWARD) {
                 AbstractDungeon.closeCurrentScreen();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.COMBAT_REWARD;
             }
             else if (!AbstractDungeon.isScreenUp) {
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == ScreenStatePatch.PERSONA_FUSION_SCREEN) {
                 if (ElizabethModInitializer.personaFusionScreen.openedDuringReward) {
@@ -69,50 +69,50 @@ public class PersonaFusionButton {
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.DEATH) {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.DEATH;
                 AbstractDungeon.deathScreen.hide();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.BOSS_REWARD) {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.BOSS_REWARD;
                 AbstractDungeon.bossRelicScreen.hide();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.SHOP) {
                 AbstractDungeon.overlayMenu.cancelButton.hide();
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.SHOP;
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.MAP) {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.MAP;
                 AbstractDungeon.closeCurrentScreen();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.SETTINGS) {
                 if (AbstractDungeon.previousScreen != null) {
                     AbstractDungeon.screenSwap = true;
                 }
                 AbstractDungeon.closeCurrentScreen();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.INPUT_SETTINGS && clickedPersonaFusionButton) {
                 if (AbstractDungeon.previousScreen != null) {
                     AbstractDungeon.screenSwap = true;
                 }
                 AbstractDungeon.closeCurrentScreen();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.CARD_REWARD) {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.CARD_REWARD;
                 AbstractDungeon.dynamicBanner.hide();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.GRID) {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.GRID;
                 AbstractDungeon.gridSelectScreen.hide();
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             else if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.HAND_SELECT) {
                 AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.HAND_SELECT;
-                ElizabethModInitializer.personaFusionScreen.open();
+                ElizabethModInitializer.personaFusionScreen.open(true);
             }
             InputHelper.justClickedLeft = false;
         }
@@ -125,7 +125,7 @@ public class PersonaFusionButton {
 
     public static void onClick() {
         if(!AbstractDungeon.isScreenUp) {
-            ElizabethModInitializer.personaFusionScreen.open();
+            ElizabethModInitializer.personaFusionScreen.open(true);
         } else {
             AbstractDungeon.closeCurrentScreen();
             ElizabethModInitializer.personaFusionScreen.close();
