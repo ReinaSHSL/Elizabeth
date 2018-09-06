@@ -23,12 +23,4 @@ public abstract class AbstractPersonaCard extends CustomCard {
             this.doBonus = true;
         }
     }
-
-    public boolean isPersona() {
-        return this.isPersona;
-    }
-
-    public String getArcana() { return this.arcana; }
-
-    public int getPersonaValue() { return this.personaValue; }
 }

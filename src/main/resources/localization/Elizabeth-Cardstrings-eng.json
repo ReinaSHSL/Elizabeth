@@ -3,6 +3,9 @@
     "NAME": "Wild Card",
     "DESCRIPTION": "Switch Arcana. NL Soulbound. NL Retain. NL You can only use Wild Card once per turn."
   },
+
+  //ALL ARCANA
+
   "Elizabeth:Fool": {
     "NAME": "Fool",
     "DESCRIPTION": "Play the bonus of the first 2 Persona cards you play this turn."
@@ -30,6 +33,12 @@
   "Elizabeth:AllOutAttackNo": {
     "NAME": "Relent",
     "DESCRIPTION": "Continue as normal."
-  }
+  },
 
+  //PERSONA BEGIN HERE
+
+  "Elizabeth:JackFrost": {
+    "NAME": "Jack Frost",
+    "DESCRIPTION": "Deal !D! damage. NL Bonus: Freeze the enemy."
+  }
 }

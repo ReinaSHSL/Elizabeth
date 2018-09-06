@@ -2,6 +2,7 @@ package ElizabethMod;
 
 import ElizabethMod.arcana.cards.*;
 import ElizabethMod.cards.AbstractPersonaCard;
+import ElizabethMod.cards.commonpersona.JackFrost;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
@@ -70,6 +71,8 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new WildCard());
+        BaseMod.addCard(new JackFrost());
+        listOfBasicPersona.add(new JackFrost());
         arcanaList.add(new Fool());
         arcanaList.add(new Magician());
         arcanaList.add(new Priestess());

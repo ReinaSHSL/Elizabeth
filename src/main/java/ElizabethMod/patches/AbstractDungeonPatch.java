@@ -77,9 +77,8 @@ public class AbstractDungeonPatch {
 
         @SpireInsertPatch(rloc = 94)
         public static void Insert(AbstractDungeon __instance) {
-            SpriteBatch sb = new SpriteBatch();
             if(AbstractDungeon.screen == ScreenStatePatch.PERSONA_FUSION_SCREEN)
-              ElizabethModInitializer.personaFusionScreen.update(sb);
+              ElizabethModInitializer.personaFusionScreen.update();
         }
     }
 }
