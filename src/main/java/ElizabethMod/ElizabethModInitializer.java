@@ -123,11 +123,14 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         listOfPriestessPersona.add(new Apsaras());
 
         //List of Lovers
-        listOfFoolPersona.add(new QueenMab());
+        listOfLoversPersona.add(new QueenMab());
 
         //List of Basic Persona
         listOfBasicPersona.add(new JackFrost());
         listOfBasicPersona.add(new Apsaras());
+
+        //List of Uncommon Persona
+        listOfUncommonPersona.add(new QueenMab());
 
         //List of Arcana
         arcanaList.add(new Fool());

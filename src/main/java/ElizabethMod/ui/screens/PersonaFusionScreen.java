@@ -12,19 +12,26 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.MathHelper;
+import com.megacrit.cardcrawl.helpers.Sprite;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
+import javax.xml.soap.Text;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class PersonaFusionScreen {
 
@@ -41,16 +48,17 @@ public class PersonaFusionScreen {
     private boolean personaChange = false;
     private boolean changePersonaOne = false;
     private boolean changePersonaTwo = false;
-    private static final File dataFile = new File("resources/PersonaFusion.txt");
+    private static Hitbox fuseButtonHb;
+    private static Texture fuseButton;
 
     public PersonaFusionScreen() {
     }
 
     public void open(boolean resetCards) {
         if (resetCards) {
-            personaOneCard = new BlankPersonaCard();
-            personaTwoCard = new BlankPersonaCard();
-            personaResultCard = new BlankPersonaCard();
+            personaOneCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
+            personaTwoCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
+            personaResultCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
         }
         personaOneCard.drawScale = 1.0f;
         personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
@@ -67,6 +75,9 @@ public class PersonaFusionScreen {
         personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
         personaResult = new Hitbox(personaResultCard.current_x - (AbstractCard.IMG_WIDTH / 2), personaResultCard.current_y - (AbstractCard.IMG_HEIGHT / 2),
                 AbstractCard.IMG_WIDTH, AbstractCard.IMG_HEIGHT);
+        fuseButton = TextureLoader.getTexture("ElizabethImgs/ui/buttons/fuseButton.png");
+        fuseButtonHb = new Hitbox((Settings.WIDTH / 2F - fuseButton.getWidth() / 2F)  * Settings.scale, (Settings.HEIGHT / 2F - 300F) * Settings.scale,
+                fuseButton.getWidth(), fuseButton.getHeight());
         AbstractDungeon.player.releaseCard();
         AbstractDungeon.screen = ScreenStatePatch.PERSONA_FUSION_SCREEN;
         AbstractDungeon.overlayMenu.showBlackScreen();
@@ -96,6 +107,8 @@ public class PersonaFusionScreen {
         sb.setColor(Color.WHITE);
         yScale = MathHelper.scaleLerpSnap(yScale, 1.0f);
         sb.draw(velvetRoom, 0, 0);
+        sb.draw(fuseButton, (Settings.WIDTH / 2F - fuseButton.getWidth() / 2F)  * Settings.scale, (Settings.HEIGHT / 2F - 300F) * Settings.scale);
+        fuseButtonHb.render(sb);
         renderCardPreview(sb);
         justClicked = false;
     }
@@ -110,11 +123,35 @@ public class PersonaFusionScreen {
     }
 
     public void update() {
+        if (AbstractDungeon.overlayMenu.cancelButton.isHidden) {
+            AbstractDungeon.overlayMenu.cancelButton.show("Return");
+        }
         personaOne.update();
         personaTwo.update();
+        fuseButtonHb.update();
         getResultPersona();
         if (InputHelper.justClickedLeft) {
             justClicked = true;
+        }
+        if (fuseButtonHb.hovered && InputHelper.justClickedLeft) {
+            AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(personaOneCard)));
+            AbstractDungeon.player.masterDeck.removeCard(personaOneCard);
+            AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(personaTwoCard)));
+            AbstractDungeon.player.masterDeck.removeCard(personaTwoCard);
+            AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(CardLibrary.getCopy(personaResultCard.cardID),
+                    Settings.WIDTH / 2F * Settings.scale, Settings.HEIGHT / 2F * Settings.scale));
+            personaOneCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
+            personaOneCard.drawScale = 1.0f;
+            personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
+            personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+            personaTwoCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
+            personaTwoCard.drawScale = 1.0f;
+            personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
+            personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+            personaResultCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
+            personaResultCard.drawScale = 1.0f;
+            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
         }
         if (personaOne.hovered) {
             updateCardPreview(personaOneCard);
@@ -134,16 +171,24 @@ public class PersonaFusionScreen {
             openPersonaList();
         }
         if (personaOne.hovered && InputHelper.justClickedRight) {
-            personaOneCard = new BlankPersonaCard();
+            personaOneCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
             personaOneCard.drawScale = 1.0f;
             personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
             personaOneCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+            personaResultCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
+            personaResultCard.drawScale = 1.0f;
+            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
         }
         if (personaTwo.hovered && InputHelper.justClickedRight) {
-            personaTwoCard = new BlankPersonaCard();
+            personaTwoCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
             personaTwoCard.drawScale = 1.0f;
             personaTwoCard.current_x = Settings.WIDTH / 1.35F * Settings.scale;
             personaTwoCard.current_y = (Settings.HEIGHT / 2F - 200F) * Settings.scale;
+            personaResultCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
+            personaResultCard.drawScale = 1.0f;
+            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
         }
         if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0 && this.personaChange) {
             for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
@@ -198,14 +243,14 @@ public class PersonaFusionScreen {
             resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
         }
         int resultantValue = personaOneCard.personaValue + personaTwoCard.personaValue;
-        System.out.println(resultantValue);
+        //System.out.println(resultantValue);
         if (resultantArcana == null) {
             return;
         }
         switch(resultantArcana) {
             case "Fool":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfFoolPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -236,7 +281,7 @@ public class PersonaFusionScreen {
                 }
             case "Magician":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfMagicianPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -267,7 +312,7 @@ public class PersonaFusionScreen {
                 }
             case "Priestess":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfPriestessPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -298,7 +343,7 @@ public class PersonaFusionScreen {
                 }
             case "Empress":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfEmpressPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -328,8 +373,8 @@ public class PersonaFusionScreen {
                     }
                 }
             case "Emperor":
-                for (AbstractPersonaCard c : ElizabethModInitializer.listOfMagicianPersona) {
-                    System.out.println(c);
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfEmperorPersona) {
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -360,7 +405,7 @@ public class PersonaFusionScreen {
                 }
             case "Hierophant":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfHierophantPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -391,7 +436,7 @@ public class PersonaFusionScreen {
                 }
             case "Lovers":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfLoversPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -422,7 +467,7 @@ public class PersonaFusionScreen {
                 }
             case "Chariot":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfChariotPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -453,7 +498,7 @@ public class PersonaFusionScreen {
                 }
             case "Justice":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfJusticePersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -484,7 +529,7 @@ public class PersonaFusionScreen {
                 }
             case "Hermit":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfHermitPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -515,7 +560,7 @@ public class PersonaFusionScreen {
                 }
             case "Fortune":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfFortunePersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -546,7 +591,7 @@ public class PersonaFusionScreen {
                 }
             case "Strength":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfStrengthPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -577,7 +622,7 @@ public class PersonaFusionScreen {
                 }
             case "HangedMan":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfHangedManPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -608,7 +653,38 @@ public class PersonaFusionScreen {
                 }
             case "Death":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfDeathPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Temperance":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfTemperancePersona) {
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -639,7 +715,7 @@ public class PersonaFusionScreen {
                 }
             case "Devil":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfDevilPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -670,7 +746,7 @@ public class PersonaFusionScreen {
                 }
             case "Tower":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfTowerPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -701,7 +777,7 @@ public class PersonaFusionScreen {
                 }
             case "Star":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfStarPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -732,7 +808,7 @@ public class PersonaFusionScreen {
                 }
             case "Moon":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfMoonPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -763,7 +839,7 @@ public class PersonaFusionScreen {
                 }
             case "Sun":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfSunPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -794,7 +870,7 @@ public class PersonaFusionScreen {
                 }
             case "Judgement":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfJudgementPersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
@@ -825,7 +901,7 @@ public class PersonaFusionScreen {
                 }
             case "Universe":
                 for (AbstractPersonaCard c : ElizabethModInitializer.listOfUniversePersona) {
-                    System.out.println(c);
+                    //System.out.println(c);
                     if (c.personaValue == resultantValue) {
                         personaResultCard = c;
                         personaResultCard.drawScale = 1.0f;
