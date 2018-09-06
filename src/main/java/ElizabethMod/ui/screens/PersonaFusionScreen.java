@@ -47,7 +47,6 @@ public class PersonaFusionScreen {
     }
 
     public void open(boolean resetCards) {
-        System.out.println(ElizabethModInitializer.personaFusionCombinations);
         if (resetCards) {
             personaOneCard = new BlankPersonaCard();
             personaTwoCard = new BlankPersonaCard();
@@ -188,62 +187,674 @@ public class PersonaFusionScreen {
     }
 
 
-    private AbstractPersonaCard getResultPersona() {
-        AbstractPersonaCard resultPersona = new BlankPersonaCard();
+    private void getResultPersona() {
         String resultantArcana;
+        ArrayList<AbstractPersonaCard> lesserPersonaList = new ArrayList<>();
+        int checkValue = 0;
         String concatenatedArcana = personaOneCard.arcana + personaTwoCard.arcana;
-        try {
+        resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
+        if (resultantArcana == null) {
+            concatenatedArcana = personaTwoCard.arcana + personaOneCard.arcana;
             resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
-            System.out.println("Fail1");
-        } catch (Exception e) {
-            resultantArcana = "noCombo";
-            System.out.println("Succ");
         }
-        if (resultantArcana.equals("noCombo")) {
-            try {
-                System.out.println("Hope succ");
-                concatenatedArcana = personaTwoCard.arcana + personaOneCard.arcana;
-                resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
-            } catch (Exception e) {
-                System.out.println("Oof");
-            }
+        int resultantValue = personaOneCard.personaValue + personaTwoCard.personaValue;
+        System.out.println(resultantValue);
+        if (resultantArcana == null) {
+            return;
         }
-//        int resultantValue = personaOneCard.personaValue + personaTwoCard.personaValue;
-//        switch(resultantArcana) {
-//            case "Fool":
-//                ArrayList<AbstractPersonaCard> lesserPersonaList = new ArrayList<>();
-//                int checkValue = 0;
-//                for (AbstractPersonaCard c : ElizabethModInitializer.listOfFoolPersona) {
-//                    if (c.personaValue == resultantValue) {
-//                        resultPersona = c;
-//                        resultPersona.drawScale = 1.0f;
-//                        resultPersona.current_x = Settings.WIDTH / 2F * Settings.scale;
-//                        resultPersona.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
-//                        break;
-//                    } else {
-//                        if (c.personaValue < resultantValue) {
-//                            lesserPersonaList.add(c);
-//                        }
-//                    }
-//                }
-//                if (lesserPersonaList.size() != 0) {
-//                    for (AbstractPersonaCard c : lesserPersonaList) {
-//                        if (c.personaValue > checkValue) {
-//                            checkValue = c.personaValue;
-//                        }
-//                    }
-//                    for (AbstractPersonaCard c : lesserPersonaList) {
-//                        if (c.personaValue == checkValue) {
-//                            resultPersona = c;
-//                            resultPersona.drawScale = 1.0f;
-//                            resultPersona.current_x = Settings.WIDTH / 2F * Settings.scale;
-//                            resultPersona.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
-//                            break;
-//                        }
-//                    }
-//                }
-//            case "Magician":
-//        }
-        return resultPersona;
+        switch(resultantArcana) {
+            case "Fool":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfFoolPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Magician":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfMagicianPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Priestess":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfPriestessPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Empress":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfEmpressPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Emperor":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfMagicianPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Hierophant":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfHierophantPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Lovers":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfLoversPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Chariot":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfChariotPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Justice":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfJusticePersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Hermit":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfHermitPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Fortune":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfFortunePersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Strength":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfStrengthPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "HangedMan":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfHangedManPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Death":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfDeathPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Devil":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfDevilPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Tower":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfTowerPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Star":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfStarPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Moon":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfMoonPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Sun":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfSunPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Judgement":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfJudgementPersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+            case "Universe":
+                for (AbstractPersonaCard c : ElizabethModInitializer.listOfUniversePersona) {
+                    System.out.println(c);
+                    if (c.personaValue == resultantValue) {
+                        personaResultCard = c;
+                        personaResultCard.drawScale = 1.0f;
+                        personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                        personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                        break;
+                    } else {
+                        if (c.personaValue < resultantValue) {
+                            lesserPersonaList.add(c);
+                        }
+                    }
+                }
+                if (lesserPersonaList.size() != 0) {
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue > checkValue) {
+                            checkValue = c.personaValue;
+                        }
+                    }
+                    for (AbstractPersonaCard c : lesserPersonaList) {
+                        if (c.personaValue == checkValue) {
+                            personaResultCard = c;
+                            personaResultCard.drawScale = 1.0f;
+                            personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
+                            personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
+                            break;
+                        }
+                    }
+                }
+
+        }
     }
 }

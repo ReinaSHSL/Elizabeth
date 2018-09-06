@@ -42,6 +42,9 @@
 
   //PERSONA BEGIN HERE
 
+
+  //BASIC PERSONA
+
   "Elizabeth:Apsaras": {
     "NAME": "Apsaras",
     "DESCRIPTION": "Priestess NL Deal !D! damage. NL Bonus: Gain 1 Artifact."
@@ -49,5 +52,12 @@
   "Elizabeth:JackFrost": {
     "NAME": "Jack Frost",
     "DESCRIPTION": "Magician NL Deal !D! damage. NL Bonus: Freeze the enemy."
+  },
+
+  //UNCOMMON PERSONA
+
+  "Elizabeth:QueenMab": {
+    "NAME": "Queen Mab",
+    "DESCRIPTION": "Lovers NL Apply 1 Charm. NL Exhaust. NL Bonus: Don't Exhaust."
   }
 }

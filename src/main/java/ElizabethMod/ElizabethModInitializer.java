@@ -5,6 +5,7 @@ import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.cards.commonpersona.Apsaras;
 import ElizabethMod.cards.commonpersona.JackFrost;
 import ElizabethMod.cards.special.WildCard;
+import ElizabethMod.cards.uncommonpersona.QueenMab;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.enums.ElizabethEnum;
@@ -108,8 +109,12 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         BaseMod.addCard(new JackFrost());
 
         //Uncommon Persona
+        BaseMod.addCard(new QueenMab());
 
         //Rare Persona
+
+        //List of Fools
+
 
         //List of Magicians
         listOfMagicianPersona.add(new JackFrost());
@@ -118,6 +123,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         listOfPriestessPersona.add(new Apsaras());
 
         //List of Lovers
+        listOfFoolPersona.add(new QueenMab());
 
         //List of Basic Persona
         listOfBasicPersona.add(new JackFrost());
@@ -391,5 +397,6 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         personaFusionCombinations.put("SunSun", "Sun");
         personaFusionCombinations.put("SunJudgement", "Star");
         personaFusionCombinations.put("JudgementJudgement", "Judgement");
+        personaFusionCombinations.put("UniverseUniverse", "Universe");
     }
 }

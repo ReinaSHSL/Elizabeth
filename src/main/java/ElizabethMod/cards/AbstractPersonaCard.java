@@ -18,7 +18,9 @@ public abstract class AbstractPersonaCard extends CustomCard {
 
     public void bonus() {
         String playerArcana = AbstractArcanaPower.getPlayerArcana();
-        assert playerArcana != null;
+        if (playerArcana == null) {
+            return;
+        }
         if (playerArcana.equals(this.arcana)) {
             this.doBonus = true;
         }
