@@ -2,6 +2,7 @@ package ElizabethMod.patches;
 
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.enums.ElizabethEnum;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -76,8 +77,9 @@ public class AbstractDungeonPatch {
 
         @SpireInsertPatch(rloc = 94)
         public static void Insert(AbstractDungeon __instance) {
+            SpriteBatch sb = new SpriteBatch();
             if(AbstractDungeon.screen == ScreenStatePatch.PERSONA_FUSION_SCREEN)
-              ElizabethModInitializer.personaFusionScreen.update();
+              ElizabethModInitializer.personaFusionScreen.update(sb);
         }
     }
 }
