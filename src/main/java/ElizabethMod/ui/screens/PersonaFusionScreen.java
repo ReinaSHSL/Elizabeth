@@ -4,6 +4,7 @@ import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.cards.screencards.BlankPersonaCard;
 import ElizabethMod.character.Elizabeth;
+import ElizabethMod.effects.ExhaustEffectTop;
 import ElizabethMod.patches.ScreenStatePatch;
 import ElizabethMod.tools.DataParser;
 import ElizabethMod.tools.InvalidCommandException;
@@ -134,11 +135,11 @@ public class PersonaFusionScreen {
             justClicked = true;
         }
         if (fuseButtonHb.hovered && InputHelper.justClickedLeft) {
-            AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(personaOneCard)));
+            AbstractDungeon.topLevelEffectsQueue.add(new ExhaustEffectTop(personaOneCard));
             AbstractDungeon.player.masterDeck.removeCard(personaOneCard);
-            AbstractDungeon.actionManager.addToTop(new VFXAction(new ExhaustCardEffect(personaTwoCard)));
+            AbstractDungeon.topLevelEffectsQueue.add(new ExhaustEffectTop(personaTwoCard));
             AbstractDungeon.player.masterDeck.removeCard(personaTwoCard);
-            AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(CardLibrary.getCopy(personaResultCard.cardID),
+            AbstractDungeon.topLevelEffectsQueue.add(new ShowCardAndObtainEffect(CardLibrary.getCopy(personaResultCard.cardID),
                     Settings.WIDTH / 2F * Settings.scale, Settings.HEIGHT / 2F * Settings.scale));
             personaOneCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
             personaOneCard.drawScale = 1.0f;
