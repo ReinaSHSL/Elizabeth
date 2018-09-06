@@ -1,9 +1,8 @@
 package ElizabethMod.actions;
 
 import ElizabethMod.ElizabethModInitializer;
-import ElizabethMod.arcana.powers.*;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
-import ElizabethMod.powers.AuthorityPower;
+import ElizabethMod.arcana.powers.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;

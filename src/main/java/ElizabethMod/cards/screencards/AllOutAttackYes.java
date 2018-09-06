@@ -1,10 +1,8 @@
 package ElizabethMod.cards.screencards;
 
-import ElizabethMod.actions.AllOutAttackAction;
 import ElizabethMod.actions.AllOutAttackAttackAction;
 import ElizabethMod.enums.AbstractCardEnum;
 import basemod.abstracts.CustomCard;
-import basemod.interfaces.PostDrawSubscriber;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;

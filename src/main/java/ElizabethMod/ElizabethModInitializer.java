@@ -2,11 +2,13 @@ package ElizabethMod;
 
 import ElizabethMod.arcana.cards.*;
 import ElizabethMod.cards.AbstractPersonaCard;
+import ElizabethMod.cards.commonpersona.Apsaras;
 import ElizabethMod.cards.commonpersona.JackFrost;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.enums.ElizabethEnum;
+import ElizabethMod.relics.MemoriesOfYou;
 import ElizabethMod.ui.screens.PersonaFusionScreen;
 import basemod.BaseMod;
 import basemod.interfaces.*;
@@ -17,13 +19,14 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.localization.RelicStrings;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 @SpireInitializer
 public class ElizabethModInitializer implements EditCharactersSubscriber, EditCardsSubscriber, EditKeywordsSubscriber,
-        EditStringsSubscriber {
+        EditStringsSubscriber, EditRelicsSubscriber {
     private static final String MODNAME = "Elizabeth";
     private static final String AUTHOR = "Reina";
     private static final String DESCRIPTION = "Adds Elizabeth as a playable character.";
@@ -44,6 +47,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     public static ArrayList<AbstractArcanaCard> arcanaList = new ArrayList<>();
     public static ArrayList<AbstractPersonaCard> compendium = new ArrayList<>();
     public static ArrayList<AbstractCard> listOfBasicPersona = new ArrayList<>();
+    public static ArrayList<AbstractCard> listOfUncommonPersona = new ArrayList<>();
     public static PersonaFusionScreen personaFusionScreen = new PersonaFusionScreen();
 
     public ElizabethModInitializer() {
@@ -70,9 +74,20 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
 
     @Override
     public void receiveEditCards() {
+        //Non-Persona Cards
         BaseMod.addCard(new WildCard());
+
+        //Common Persona
+        BaseMod.addCard(new Apsaras());
         BaseMod.addCard(new JackFrost());
+
+        //Uncommon Persona
+
+        //Rare Persona
+
+        //Lists
         listOfBasicPersona.add(new JackFrost());
+        listOfBasicPersona.add(new Apsaras());
         arcanaList.add(new Fool());
         arcanaList.add(new Magician());
         arcanaList.add(new Priestess());
@@ -84,18 +99,27 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
     public void receiveEditKeywords() {
         String[] Soulbound = {"soulbound"};
         BaseMod.addKeyword(Soulbound, "Cannot be removed from your hand.");
+        String[] Frozen = {"freeze"};
+        BaseMod.addKeyword(Frozen, "Enemy cannot act this turn. Removed upon being attacked.");
+        String[] Bonus = {"bonus"};
+        BaseMod.addKeyword(Bonus, "Additional effects activated by having the same Arcana as the Persona.");
     }
 
     @Override
     public void receiveEditStrings() {
-//        String relicStrings = Gdx.files.internal("localization/Yohane-RelicStrings-eng.json").readString(
-//                String.valueOf(StandardCharsets.UTF_8));
-//        BaseMod.loadCustomStrings(RelicStrings.class, relicStrings);
+        String relicStrings = Gdx.files.internal("localization/Elizabeth-RelicStrings-eng.json").readString(
+                String.valueOf(StandardCharsets.UTF_8));
+        BaseMod.loadCustomStrings(RelicStrings.class, relicStrings);
         String powerStrings = Gdx.files.internal("localization/Elizabeth-Powerstrings-eng.json").readString(
                 String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(PowerStrings.class, powerStrings);
         String cardStrings = Gdx.files.internal("localization/Elizabeth-Cardstrings-eng.json").readString(
                 String.valueOf(StandardCharsets.UTF_8));
         BaseMod.loadCustomStrings(CardStrings.class, cardStrings);
+    }
+
+    @Override
+    public void receiveEditRelics() {
+        BaseMod.addRelicToCustomPool(new MemoriesOfYou(), AbstractCardEnum.VELVET_BLUE);
     }
 }

@@ -1,13 +1,15 @@
 package ElizabethMod.effects;
 
-import com.megacrit.cardcrawl.vfx.*;
-import com.megacrit.cardcrawl.helpers.*;
-import com.badlogic.gdx.graphics.*;
-import com.megacrit.cardcrawl.core.*;
-import com.megacrit.cardcrawl.dungeons.*;
-import com.badlogic.gdx.*;
-import com.badlogic.gdx.math.*;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 public class InvertedCleaveEffect extends AbstractGameEffect {
     private float x;

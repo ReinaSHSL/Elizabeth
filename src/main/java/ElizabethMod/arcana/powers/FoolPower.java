@@ -1,15 +1,11 @@
 package ElizabethMod.arcana.powers;
 
-import ElizabethMod.arcana.powers.AbstractArcanaPower;
 import ElizabethMod.cards.AbstractPersonaCard;
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 public class FoolPower extends AbstractArcanaPower {

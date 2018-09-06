@@ -1,18 +1,13 @@
 package ElizabethMod.patches;
 
 import ElizabethMod.ElizabethModInitializer;
-import ElizabethMod.enums.ElizabethEnum;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import ElizabethMod.character.Elizabeth;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import ElizabethMod.character.Elizabeth;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.relics.Cauldron;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

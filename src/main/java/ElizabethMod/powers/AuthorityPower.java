@@ -1,5 +1,6 @@
 package ElizabethMod.powers;
 
+import ElizabethMod.actions.StunMonsterAction;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -24,7 +25,6 @@ public class AuthorityPower extends AbstractPower {
         this.owner = owner;
         updateDescription();
         this.img = getAuthorityPowerTexture();
-        this.type = PowerType.DEBUFF;
         this.canGoNegative = false;
     }
 
@@ -41,9 +41,8 @@ public class AuthorityPower extends AbstractPower {
 
     @Override
     public void onSpecificTrigger() {
-        System.out.println("Authority");
         AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, ID));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.owner, this.owner, new DownedPower((AbstractMonster) this.owner)));
+        AbstractDungeon.actionManager.addToBottom(new StunMonsterAction((AbstractMonster)this.owner, AbstractDungeon.player, DownedPower.POWER_ID));
     }
 
     private static Texture getAuthorityPowerTexture() {

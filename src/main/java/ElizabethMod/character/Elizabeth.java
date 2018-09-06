@@ -42,16 +42,19 @@ public class Elizabeth extends CustomPlayer implements OnStartBattleSubscriber{
 
     public static ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
+        retVal.add("Elizabeth:JackFrost");
+        retVal.add("Elizabeth:Apsaras");
         return retVal;
     }
 
     public static ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
+        retVal.add("Elizabeth:MemoriesOfYou");
         return retVal;
     }
 
     public static final int STARTING_HP = 80;
-    public static final int MAX_HP = 80;
+    public static final int MAX_HP = 50;
     public static final int STARTING_GOLD = 99;
     public static final int HAND_SIZE = 5;
 
@@ -64,7 +67,7 @@ public class Elizabeth extends CustomPlayer implements OnStartBattleSubscriber{
 
     @Override
     public void receiveOnBattleStart(AbstractRoom abstractRoom) {
-        if (AbstractDungeon.player instanceof Elizabeth) {
+        if (AbstractDungeon.player instanceof Elizabeth && !AbstractDungeon.player.hand.group.contains(new WildCard())) {
             AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new WildCard()));
         }
     }

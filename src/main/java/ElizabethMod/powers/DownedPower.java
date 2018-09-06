@@ -2,12 +2,8 @@ package ElizabethMod.powers;
 
 import ElizabethMod.actions.AllOutAttackAction;
 import ElizabethMod.actions.StunMonsterAction;
-import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.AbstractCreature;
-import com.megacrit.cardcrawl.powers.AbstractPower;
-
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -21,9 +17,6 @@ public class DownedPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private byte moveByte;
-    private AbstractMonster.Intent moveIntent;
-
     public DownedPower(AbstractMonster owner) {
         name = NAME;
         ID = POWER_ID;
@@ -32,11 +25,6 @@ public class DownedPower extends AbstractPower {
         type = PowerType.DEBUFF;
         updateDescription();
         img = ImageMaster.loadImage("ElizabethImgs/powers/DownedPower.png");
-
-        if (this.owner instanceof AbstractMonster) {
-            moveByte = owner.nextMove;
-            moveIntent = owner.intent;
-        }
     }
 
     @Override
@@ -46,26 +34,19 @@ public class DownedPower extends AbstractPower {
 
     @Override
     public void onRemove() {
-        if (owner instanceof AbstractMonster) {
-            AbstractMonster m = (AbstractMonster) owner;
-            m.setMove(moveByte, moveIntent);
-            m.createIntent();
-        }
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(this.owner, AbstractDungeon.player, StunMonsterPower.POWER_ID));
     }
 
     @Override
-    public void atStartOfTurn() {
-        if (owner instanceof AbstractMonster) {
-            AbstractMonster m = (AbstractMonster) owner;
-            m.setMove(moveByte, moveIntent);
-            m.createIntent();
+    public void atEndOfRound() {
+        reducePower(1);
+        if (amount <= 0) {
+            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
         }
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
     }
 
     @Override
     public void onInitialApplication() {
-        AbstractDungeon.actionManager.addToBottom(new StunMonsterAction((AbstractMonster)this.owner, AbstractDungeon.player));
         int downedCount = 0;
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (mo.hasPower(DownedPower.POWER_ID)) {

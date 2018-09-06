@@ -1,6 +1,5 @@
 package ElizabethMod.patches;
 
-import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.character.Elizabeth;
 import ElizabethMod.ui.buttons.PersonaFusionButton;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

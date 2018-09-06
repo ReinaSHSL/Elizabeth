@@ -1,8 +1,8 @@
 package ElizabethMod.actions;
 
 import ElizabethMod.powers.DownedPower;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-
+import ElizabethMod.powers.FrozenPower;
+import ElizabethMod.powers.StunMonsterPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -15,17 +15,26 @@ import com.megacrit.cardcrawl.powers.ArtifactPower;
 import java.lang.reflect.Field;
 
 public class StunMonsterAction extends AbstractGameAction {
-    public StunMonsterAction(AbstractMonster target, AbstractCreature source) {
+    private String stunType;
+
+    public StunMonsterAction(AbstractMonster target, AbstractCreature source, String stunType) {
         this.target = target;
         this.source = source;
         actionType = AbstractGameAction.ActionType.DEBUFF;
         duration = Settings.ACTION_DUR_FAST;
+        this.stunType = stunType;
     }
 
     @Override
     public void update() {
         if (duration == Settings.ACTION_DUR_FAST) {
-            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(target, source, new DownedPower((AbstractMonster) target), 1));
+            if (stunType.equals(DownedPower.POWER_ID)) {
+                AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(target, source, new DownedPower((AbstractMonster) target)));
+            }
+            if (stunType.equals(FrozenPower.POWER_ID)) {
+                AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(target, source, new FrozenPower((AbstractMonster) target, 1), 1));
+            }
+            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(target, source, new StunMonsterPower((AbstractMonster) target, 1), 1));
             if (!target.hasPower(ArtifactPower.POWER_ID)) {
                 try {
                     Field f = AbstractMonster.class.getDeclaredField("move");

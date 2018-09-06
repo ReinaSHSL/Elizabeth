@@ -37,6 +37,10 @@
 
   //PERSONA BEGIN HERE
 
+  "Elizabeth:Apsaras": {
+    "NAME": "Apsaras",
+    "DESCRIPTION": "Deal !D! damage. NL Bonus: Gain 1 Artifact."
+  },
   "Elizabeth:JackFrost": {
     "NAME": "Jack Frost",
     "DESCRIPTION": "Deal !D! damage. NL Bonus: Freeze the enemy."

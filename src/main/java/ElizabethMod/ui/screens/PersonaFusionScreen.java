@@ -1,10 +1,6 @@
 package ElizabethMod.ui.screens;
 
 import ElizabethMod.ElizabethModInitializer;
-import ElizabethMod.cards.AbstractPersonaCard;
-import ElizabethMod.cards.screencards.AllOutAttackNo;
-import ElizabethMod.cards.screencards.AllOutAttackYes;
-import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.patches.ScreenStatePatch;
 import ElizabethMod.tools.TextureLoader;
 import com.badlogic.gdx.graphics.Color;
@@ -17,12 +13,9 @@ import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Hitbox;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.MathHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 

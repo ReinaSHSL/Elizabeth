@@ -1,6 +1,5 @@
 package ElizabethMod.arcana.cards;
 
-import ElizabethMod.arcana.powers.AbstractArcanaPower;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 

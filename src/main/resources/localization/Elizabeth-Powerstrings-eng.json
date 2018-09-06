@@ -48,5 +48,21 @@
     "DESCRIPTIONS": [
       "This enemy takes 25% more damage and cannot act this turn. Become Undowned at the start of next turn."
     ]
+  },
+  "Elizabeth:FrozenPower": {
+    "NAME": "Frozen",
+    "DESCRIPTIONS": [
+      "This enemy cannot act for ",
+      " turn. ALL Frozen removed upon being attacked.",
+      " turns. ALL Frozen removed upon being attacked."
+    ]
+  },
+  "Elizabeth:Stunned": {
+    "NAME": "Stunned",
+    "DESCRIPTIONS": [
+      "Does nothing for #b",
+      " turn.",
+      " turns."
+    ]
   }
 }
