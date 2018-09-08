@@ -25,7 +25,7 @@ public class AbstractCardPatch {
         public static void Postfix(AbstractCard card, SpriteBatch sb, boolean b1, boolean b2){
             if(Field.isCompendium.get(card)){
                 AbstractPersonaCard c = (AbstractPersonaCard) card;
-                float currentX = card.current_x + 350.0f * card.drawScale / 3.0f;
+                float currentX = card.current_x + 370.0f * card.drawScale / 3.0f;
                 float currentY = card.current_y + 520.0f * card.drawScale / 3.0f;
                 sb.draw(goldIcon, currentX  * Settings.scale, currentY * Settings.scale, goldIcon.getWidth(), goldIcon.getHeight());
                 FontHelper.renderFontLeftTopAligned(sb, FontHelper.topPanelInfoFont, Integer.toString(c.goldValue),

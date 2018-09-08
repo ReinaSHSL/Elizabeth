@@ -47,11 +47,13 @@ public class PersonaFusionScreen {
     private static Texture compendiumButton;
     private boolean shouldRender = true;
     private float duration;
+    private boolean updateHitboxes = true;
 
     public PersonaFusionScreen() {
     }
 
     public void open(boolean resetCards) {
+        updateHitboxes = true;
         if (resetCards) {
             personaOneCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
             personaTwoCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
@@ -110,13 +112,11 @@ public class PersonaFusionScreen {
         sb.draw(fuseButton, (Settings.WIDTH / 2F - fuseButton.getWidth() / 2F)  * Settings.scale, (Settings.HEIGHT / 2F - 300F) * Settings.scale);
         sb.draw(compendiumButton, Settings.WIDTH - compendiumButton.getWidth() / 1.5F * Settings.scale, 0,
                 compendiumButton.getWidth() / 1.5F * Settings.scale, compendiumButton.getHeight() / 1.5F * Settings.scale);
-        fuseButtonHb.render(sb);
-        compendiumButtonHb.render(sb);
-        renderCardPreview(sb);
+        renderObjects(sb);
         justClicked = false;
     }
 
-    private void renderCardPreview(SpriteBatch sb) {
+    private void renderObjects(SpriteBatch sb) {
         if (shouldRender) {
             personaOneCard.render(sb);
             personaOne.render(sb);
@@ -124,18 +124,23 @@ public class PersonaFusionScreen {
             personaTwo.render(sb);
             personaResultCard.render(sb);
             personaResult.render(sb);
+            fuseButtonHb.render(sb);
+            compendiumButtonHb.render(sb);
         }
     }
 
     public void update() {
+        ElizabethModInitializer.compendiumScreen.update();
         if (AbstractDungeon.overlayMenu.cancelButton.isHidden) {
             AbstractDungeon.overlayMenu.cancelButton.show("Return");
         }
-        personaOne.update();
-        personaTwo.update();
-        personaResult.update();
-        fuseButtonHb.update();
-        compendiumButtonHb.update();
+        if (updateHitboxes) {
+            personaOne.update();
+            personaTwo.update();
+            personaResult.update();
+            fuseButtonHb.update();
+            compendiumButtonHb.update();
+        }
         getResultPersona();
         duration -= Gdx.graphics.getDeltaTime();
         if (duration < 0.0F) {
@@ -170,6 +175,7 @@ public class PersonaFusionScreen {
             personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
         }
         if (compendiumButtonHb.hovered && InputHelper.justClickedLeft) {
+            updateHitboxes = false;
             ElizabethModInitializer.compendiumScreen.open();
         }
         SpriteBatch sb = null;
