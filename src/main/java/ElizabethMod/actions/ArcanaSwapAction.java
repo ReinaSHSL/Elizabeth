@@ -4,6 +4,7 @@ import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
 import ElizabethMod.arcana.cards.Chariot;
 import ElizabethMod.arcana.powers.*;
+import ElizabethMod.powers.JusticeDamagePower;
 import ElizabethMod.powers.LoversVulnerablePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -19,10 +20,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+import java.util.ArrayList;
+
 public class ArcanaSwapAction extends AbstractGameAction {
     private static String[] TEXT;
     private AbstractPlayer p;
     private AbstractMonster m = null;
+    private ArrayList<JusticeDamagePower> justiceList = new ArrayList<>();
 
     public ArcanaSwapAction(AbstractPlayer p) {
         this.p = p;
@@ -103,6 +107,28 @@ public class ArcanaSwapAction extends AbstractGameAction {
                             this.isDone = true;
                             break;
                         case "Justice":
+                            for (AbstractPower po : AbstractDungeon.player.powers) {
+                                if (po.ID == JusticeDamagePower.POWER_ID) {
+                                    justiceList.add((JusticeDamagePower) po);
+                                }
+                            }
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new JusticePower(AbstractDungeon.player)));
+                            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                                for (JusticeDamagePower po : justiceList) {
+                                    if (po.justiceM == mo) {
+                                        AbstractDungeon.actionManager.addToBottom(new DamageAction(mo,
+                                                new DamageInfo(p, po.amount, DamageInfo.DamageType.THORNS),
+                                                AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+                                    }
+                                }
+                            }
+                            justiceList.clear();
+                            this.isDone = true;
+                            break;
+                        case "Hermit":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new HermitPower(AbstractDungeon.player)));
                             this.isDone = true;
                             break;
                         default:

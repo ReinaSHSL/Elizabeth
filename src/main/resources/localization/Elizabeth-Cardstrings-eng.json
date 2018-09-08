@@ -43,6 +43,14 @@
     "NAME": "Chariot",
     "DESCRIPTION": "Deal 3 damage to ALL enemies."
   },
+  "Elizabeth:Justice": {
+    "NAME": "Justice",
+    "DESCRIPTION": "Deal damage to each enemy equal to the amount they attacked you for."
+  },
+  "Elizabeth:Hermit": {
+    "NAME": "Hermit",
+    "DESCRIPTION": "Return 1 card from your discard pile to your hand. NL Lose [E] [E]."
+  },
 
   //MODAL CARDS
 

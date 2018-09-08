@@ -43,6 +43,18 @@
       "It is indeed a precious gift to understand the forces that guides oneself..."
     ]
   },
+  "Elizabeth:LoversPower": {
+    "NAME": "Lovers",
+    "DESCRIPTIONS": [
+      "There is both joy and wonder in coming to understand another..."
+    ]
+  },
+  "Elizabeth:JusticePower": {
+    "NAME": "Justice",
+    "DESCRIPTIONS": [
+      "To find the one true path, one must seek guidance amidst uncertainty..."
+    ]
+  },
   "Elizabeth:AuthorityPower": {
     "NAME": "Authority",
     "DESCRIPTIONS": [
@@ -75,6 +87,13 @@
       "Does nothing for #b",
       " turn.",
       " turns."
+    ]
+  },
+  "Elizabeth:JusticeDamagePower": {
+    "NAME": "Court Record",
+    "DESCRIPTIONS": [
+      "You have taken ",
+      " damage this combat from a "
     ]
   }
 }

@@ -70,7 +70,7 @@ public class TargetAction implements RenderSubscriber, PostUpdateSubscriber {
                     case "Lovers":
                         for (AbstractPower po : hoveredCreature.powers) {
                             po.owner = AbstractDungeon.player;
-                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, 0));
                         }
                     default:
                         break;

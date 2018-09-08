@@ -85,6 +85,13 @@ public class LoversVulnerablePower extends AbstractPower {
         return damage * 1.5f;
     }
 
+
+    @Override
+    public void stackPower(int stackAmount) {
+        this.fontScale = 8.0F;
+        this.amount += stackAmount;
+    }
+
     static {
         powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
         NAME = powerStrings.NAME;
