@@ -69,9 +69,13 @@ public class TargetAction implements RenderSubscriber, PostUpdateSubscriber {
                         break;
                     case "Lovers":
                         for (AbstractPower po : hoveredCreature.powers) {
-                            po.owner = AbstractDungeon.player;
-                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, 0));
+                            AbstractPower powerToApply = po;
+                            powerToApply.owner = AbstractDungeon.player;
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, powerToApply, 0));
                         }
+                        com.megacrit.cardcrawl.core.GameCursor.hidden = false;
+                        close();
+                        break;
                     default:
                         break;
                 }

@@ -3,6 +3,7 @@ package ElizabethMod.actions;
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
 import ElizabethMod.arcana.cards.Chariot;
+import ElizabethMod.arcana.cards.Death;
 import ElizabethMod.arcana.powers.*;
 import ElizabethMod.powers.JusticeDamagePower;
 import ElizabethMod.powers.LoversVulnerablePower;
@@ -21,6 +22,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ArcanaSwapAction extends AbstractGameAction {
     private static String[] TEXT;
@@ -144,6 +146,18 @@ public class ArcanaSwapAction extends AbstractGameAction {
                         case "HangedMan":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                                     new HangedManPower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
+                        case "Death":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new DeathPower(AbstractDungeon.player)));
+                            Iterator arcanaIterate = ElizabethModInitializer.arcanaList.iterator();
+                            while(arcanaIterate.hasNext()) {
+                                Object ca = arcanaIterate.next();
+                                if (ca.getClass().equals(Death.class)) {
+                                    arcanaIterate.remove();
+                                }
+                            }
                             this.isDone = true;
                             break;
                         default:

@@ -5,6 +5,7 @@ import ElizabethMod.tools.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
@@ -36,9 +37,17 @@ public class DeathPower extends AbstractArcanaPower {
                 new ConfusionPower(AbstractDungeon.player)));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
                 new DrawPower(AbstractDungeon.player, 1)));
-        EnergyManager energy = AbstractDungeon.player.energy;
-        ++energy.energyMaster;
         AbstractDungeon.actionManager.addToBottom(new DuplicateRandomEnemyAction());
+    }
+
+    @Override
+    public void onRemove() {
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, DrawPower.POWER_ID));
+    }
+
+    @Override
+    public void atStartOfTurn() {
+        AbstractDungeon.actionManager.addToTop(new GainEnergyAction(1));
     }
 
     @Override

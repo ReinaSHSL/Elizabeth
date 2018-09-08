@@ -18,7 +18,7 @@ public class Justice extends AbstractArcanaCard {
     private static final String NAME = cardStrings.NAME;
     private static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final String IMG_PATH = "ElizabethImgs/cards/Justice.png";
-    private static final int COST = 7;
+    private static final int COST = 8;
     private static final CardRarity rarity = CardRarity.SPECIAL;
     private static final CardTarget target = CardTarget.SELF;
 

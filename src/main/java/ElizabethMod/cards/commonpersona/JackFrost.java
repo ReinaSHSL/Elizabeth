@@ -44,7 +44,6 @@ public class JackFrost extends AbstractPersonaCard {
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         super.bonus();
         if (this.doBonus) {
-            this.cost = 3;
             AbstractDungeon.actionManager.addToBottom(new StunMonsterAction(m, p, FrozenPower.POWER_ID));
         }
     }

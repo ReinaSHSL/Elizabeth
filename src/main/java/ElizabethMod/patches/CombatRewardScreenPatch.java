@@ -13,6 +13,7 @@ public class CombatRewardScreenPatch {
     @SpirePrefixPatch
     public static SpireReturn<Object> Prefix() {
         if (AbstractDungeon.player instanceof Elizabeth) {
+            AbstractDungeon.overlayMenu.proceedButton.show();
             return SpireReturn.Return(null);
         } else {
             return SpireReturn.Continue();

@@ -59,6 +59,14 @@
     "NAME": "Strength",
     "DESCRIPTION": "Gain 1 Strength. NL Lose it upon Arcana Switch."
   },
+  "Elizabeth:HangedMan": {
+    "NAME": "Hanged Man",
+    "DESCRIPTION": "Take no damage this turn. NL Lose HP equal to the amount you would've taken at the end of the next turn."
+  },
+  "Elizabeth:Death": {
+    "NAME": "Death",
+    "DESCRIPTION": "Gain [E] every turn, draw an extra card every turn. NL Lost upon switch. NL Confuse. NL Copy a random enemy. NL Can only be used once per combat."
+  },
 
   //MODAL CARDS
 
