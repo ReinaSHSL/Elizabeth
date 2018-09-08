@@ -131,6 +131,21 @@ public class ArcanaSwapAction extends AbstractGameAction {
                                     new HermitPower(AbstractDungeon.player)));
                             this.isDone = true;
                             break;
+                        case "Fortune":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new FortunePower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
+                        case "Strength":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new StrengthArcanaPower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
+                        case "HangedMan":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new HangedManPower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
                         default:
                             this.isDone = true;
                             break;

@@ -55,6 +55,12 @@
       "To find the one true path, one must seek guidance amidst uncertainty..."
     ]
   },
+  "Elizabeth:FortunePower": {
+    "NAME": "Fortune",
+    "DESCRIPTIONS": [
+      "Alongside time exists fate, the bearer of cruelty."
+    ]
+  },
   "Elizabeth:AuthorityPower": {
     "NAME": "Authority",
     "DESCRIPTIONS": [

@@ -25,7 +25,7 @@
   },
   "Elizabeth:Empress": {
     "NAME": "Empress",
-    "DESCRIPTION": "Gain 1 Dex. NL Lose it upon Arcana Switch."
+    "DESCRIPTION": "Gain 1 Dexterity. NL Lose it upon Arcana Switch."
   },
   "Elizabeth:Emperor": {
     "NAME": "Emperor",
@@ -50,6 +50,14 @@
   "Elizabeth:Hermit": {
     "NAME": "Hermit",
     "DESCRIPTION": "Return 1 card from your discard pile to your hand. NL Lose [E] [E]."
+  },
+  "Elizabeth:Fortune": {
+    "NAME": "Fortune",
+    "DESCRIPTION": "Discard 3 cards from your draw pile. NL Add a random card from your draw pile to your hand."
+  },
+  "Elizabeth:Strength": {
+    "NAME": "Strength",
+    "DESCRIPTION": "Gain 1 Strength. NL Lose it upon Arcana Switch."
   },
 
   //MODAL CARDS
