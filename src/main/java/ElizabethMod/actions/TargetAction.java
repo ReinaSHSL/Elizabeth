@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 
 
 public class TargetAction implements RenderSubscriber, PostUpdateSubscriber {
@@ -66,6 +67,11 @@ public class TargetAction implements RenderSubscriber, PostUpdateSubscriber {
                         com.megacrit.cardcrawl.core.GameCursor.hidden = false;
                         close();
                         break;
+                    case "Lovers":
+                        for (AbstractPower po : hoveredCreature.powers) {
+                            po.owner = AbstractDungeon.player;
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, po, po.amount));
+                        }
                     default:
                         break;
                 }

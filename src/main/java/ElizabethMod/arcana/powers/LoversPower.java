@@ -3,39 +3,36 @@ package ElizabethMod.arcana.powers;
 import ElizabethMod.tools.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class EmperorPower extends AbstractArcanaPower {
-    private static final String POWER_ID = "Elizabeth:EmperorPower";
+public class LoversPower extends AbstractArcanaPower {
+    private static final String POWER_ID = "Elizabeth:LoversPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     private static final String NAME = powerStrings.NAME;
     private static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
 
-    public EmperorPower(AbstractCreature owner) {
+    public LoversPower(AbstractCreature owner) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
         updateDescription();
-        this.img = getEmperorPowerTexture();
+        this.img = getLoversPowerTexture();
         this.canGoNegative = false;
     }
 
     @Override
-    public void onInitialApplication() {
-        AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(-2));
-    }
-
-    @Override
-    public void updateDescription()
-    {
+    public void updateDescription() {
         this.description = (DESCRIPTIONS[0]);
     }
 
-    private static Texture getEmperorPowerTexture() {
-        return TextureLoader.getTexture("ElizabethImgs/powers/EmperorPower.png");
+    private static Texture getLoversPowerTexture() {
+        return TextureLoader.getTexture("ElizabethImgs/powers/LoversPower.png");
     }
 }

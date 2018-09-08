@@ -140,6 +140,8 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         arcanaList.add(new Priestess());
         arcanaList.add(new Empress());
         arcanaList.add(new Emperor());
+        arcanaList.add(new Hierophant());
+        arcanaList.add(new Chariot());
 
         //Initialize Starting Persona into Compendium
         compendium.add(new JackFrost());

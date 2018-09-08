@@ -2,12 +2,17 @@ package ElizabethMod.actions;
 
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.arcana.cards.AbstractArcanaCard;
+import ElizabethMod.arcana.cards.Chariot;
 import ElizabethMod.arcana.powers.*;
+import ElizabethMod.powers.LoversVulnerablePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -48,12 +53,6 @@ public class ArcanaSwapAction extends AbstractGameAction {
             if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     switch (((AbstractArcanaCard) c).arcanaString) {
-                        case "Emperor":
-                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new EmperorPower(AbstractDungeon.player)));
-                            new TargetAction("Emperor", 1);
-                            this.isDone = true;
-                            break;
                         case "Fool":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                                     new FoolPower(AbstractDungeon.player)));
@@ -74,7 +73,40 @@ public class ArcanaSwapAction extends AbstractGameAction {
                                     new EmpressPower(AbstractDungeon.player)));
                             this.isDone = true;
                             break;
+                        case "Emperor":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new EmperorPower(AbstractDungeon.player)));
+                            new TargetAction("Emperor", 1);
+                            this.isDone = true;
+                            break;
+                        case "Hierophant":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new HierophantPower(AbstractDungeon.player)));
+                            this.isDone = true;
+                            break;
+                        case "Lovers":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new LoversPower(AbstractDungeon.player)));
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new LoversVulnerablePower(AbstractDungeon.player, 1, false)));
+                            new TargetAction("Lovers", 1);
+                            this.isDone = true;
+                            break;
+                        case "Chariot":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new ChariotPower(AbstractDungeon.player)));
+                            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                                AbstractDungeon.actionManager.addToBottom(new DamageAction(mo,
+                                        new DamageInfo(p, 3, DamageInfo.DamageType.NORMAL),
+                                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+                            }
+                            this.isDone = true;
+                            break;
+                        case "Justice":
+                            this.isDone = true;
+                            break;
                         default:
+                            this.isDone = true;
                             break;
 
                     }

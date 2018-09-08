@@ -37,6 +37,12 @@
       "Only courage in the face of doubt can lead one to the answer..."
     ]
   },
+  "Elizabeth:HierophantPower": {
+    "NAME": "Hierophant",
+    "DESCRIPTIONS": [
+      "It is indeed a precious gift to understand the forces that guides oneself..."
+    ]
+  },
   "Elizabeth:AuthorityPower": {
     "NAME": "Authority",
     "DESCRIPTIONS": [
@@ -55,6 +61,12 @@
       "This enemy cannot act for ",
       " turn. ALL Frozen removed upon being attacked.",
       " turns. ALL Frozen removed upon being attacked."
+    ]
+  },
+  "Elizabeth:LoversVulnerablePower": {
+    "NAME": "Vulnerable",
+    "DESCRIPTIONS": [
+      " Removed upon being hit."
     ]
   },
   "Elizabeth:Stunned": {

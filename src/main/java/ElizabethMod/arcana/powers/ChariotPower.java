@@ -8,34 +8,32 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
-public class EmperorPower extends AbstractArcanaPower {
-    private static final String POWER_ID = "Elizabeth:EmperorPower";
+public class ChariotPower extends AbstractArcanaPower {
+    private static final String POWER_ID = "Elizabeth:ChariotPower";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     private static final String NAME = powerStrings.NAME;
     private static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
 
-    public EmperorPower(AbstractCreature owner) {
+    public ChariotPower(AbstractCreature owner) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
         updateDescription();
-        this.img = getEmperorPowerTexture();
+        this.img = getChariotPowerTexture();
         this.canGoNegative = false;
     }
 
     @Override
     public void onInitialApplication() {
-        AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(-2));
     }
 
     @Override
-    public void updateDescription()
-    {
+    public void updateDescription() {
         this.description = (DESCRIPTIONS[0]);
     }
 
-    private static Texture getEmperorPowerTexture() {
-        return TextureLoader.getTexture("ElizabethImgs/powers/EmperorPower.png");
+    private static Texture getChariotPowerTexture() {
+        return TextureLoader.getTexture("ElizabethImgs/powers/ChariotPower.png");
     }
 }
