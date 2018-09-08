@@ -10,6 +10,7 @@ import ElizabethMod.character.Elizabeth;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.enums.ElizabethEnum;
 import ElizabethMod.relics.MemoriesOfYou;
+import ElizabethMod.ui.screens.CompendiumScreen;
 import ElizabethMod.ui.screens.PersonaFusionScreen;
 import basemod.BaseMod;
 import basemod.interfaces.*;
@@ -74,6 +75,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
 
     public static ArrayList<AbstractCard> listOfUncommonPersona = new ArrayList<>();
     public static PersonaFusionScreen personaFusionScreen = new PersonaFusionScreen();
+    public static CompendiumScreen compendiumScreen = new CompendiumScreen();
     public static HashMap<String, String> personaFusionCombinations = new HashMap<>();
 
     public ElizabethModInitializer() {
@@ -138,6 +140,10 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         arcanaList.add(new Priestess());
         arcanaList.add(new Empress());
         arcanaList.add(new Emperor());
+
+        //Initialize Starting Persona into Compendium
+        compendium.add(new JackFrost());
+        compendium.add(new Apsaras());
     }
 
     @Override

@@ -5,7 +5,6 @@ import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.powers.FrozenPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -34,6 +33,7 @@ public class JackFrost extends AbstractPersonaCard {
         this.arcana = "Magician";
         this.personaValue = 1;
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.goldValue = 80;
     }
 
     @Override
@@ -43,6 +43,7 @@ public class JackFrost extends AbstractPersonaCard {
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         super.bonus();
         if (this.doBonus) {
+            this.cost = 3;
             AbstractDungeon.actionManager.addToBottom(new StunMonsterAction(m, p, FrozenPower.POWER_ID));
         }
     }

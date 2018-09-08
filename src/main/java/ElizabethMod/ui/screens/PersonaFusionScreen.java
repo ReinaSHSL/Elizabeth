@@ -3,36 +3,28 @@ package ElizabethMod.ui.screens;
 import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.cards.screencards.BlankPersonaCard;
-import ElizabethMod.character.Elizabeth;
 import ElizabethMod.effects.ExhaustEffectTop;
 import ElizabethMod.patches.ScreenStatePatch;
-import ElizabethMod.tools.DataParser;
-import ElizabethMod.tools.InvalidCommandException;
 import ElizabethMod.tools.TextureLoader;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.blue.Strike_Blue;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.MathHelper;
-import com.megacrit.cardcrawl.helpers.Sprite;
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
-import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
-import javax.xml.soap.Text;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 public class PersonaFusionScreen {
 
@@ -46,11 +38,15 @@ public class PersonaFusionScreen {
     private static AbstractPersonaCard personaOneCard;
     private static AbstractPersonaCard personaTwoCard;
     private static AbstractPersonaCard personaResultCard;
-    private boolean personaChange = false;
+    public static boolean personaChange = false;
     private boolean changePersonaOne = false;
     private boolean changePersonaTwo = false;
     private static Hitbox fuseButtonHb;
     private static Texture fuseButton;
+    private static Hitbox compendiumButtonHb;
+    private static Texture compendiumButton;
+    private boolean shouldRender = true;
+    private float duration;
 
     public PersonaFusionScreen() {
     }
@@ -79,6 +75,9 @@ public class PersonaFusionScreen {
         fuseButton = TextureLoader.getTexture("ElizabethImgs/ui/buttons/fuseButton.png");
         fuseButtonHb = new Hitbox((Settings.WIDTH / 2F - fuseButton.getWidth() / 2F)  * Settings.scale, (Settings.HEIGHT / 2F - 300F) * Settings.scale,
                 fuseButton.getWidth(), fuseButton.getHeight());
+        compendiumButton = TextureLoader.getTexture("ElizabethImgs/ui/buttons/compendiumButton.png");
+        compendiumButtonHb = new Hitbox((Settings.WIDTH - compendiumButton.getWidth() / 2F) * Settings.scale, 0,
+                (compendiumButton.getWidth() / 1.5F + 200) * Settings.scale, compendiumButton.getHeight() / 1.5F * Settings.scale);
         AbstractDungeon.player.releaseCard();
         AbstractDungeon.screen = ScreenStatePatch.PERSONA_FUSION_SCREEN;
         AbstractDungeon.overlayMenu.showBlackScreen();
@@ -109,18 +108,23 @@ public class PersonaFusionScreen {
         yScale = MathHelper.scaleLerpSnap(yScale, 1.0f);
         sb.draw(velvetRoom, 0, 0);
         sb.draw(fuseButton, (Settings.WIDTH / 2F - fuseButton.getWidth() / 2F)  * Settings.scale, (Settings.HEIGHT / 2F - 300F) * Settings.scale);
+        sb.draw(compendiumButton, Settings.WIDTH - compendiumButton.getWidth() / 1.5F * Settings.scale, 0,
+                compendiumButton.getWidth() / 1.5F * Settings.scale, compendiumButton.getHeight() / 1.5F * Settings.scale);
         fuseButtonHb.render(sb);
+        compendiumButtonHb.render(sb);
         renderCardPreview(sb);
         justClicked = false;
     }
 
     private void renderCardPreview(SpriteBatch sb) {
-        personaOneCard.render(sb);
-        personaOne.render(sb);
-        personaTwoCard.render(sb);
-        personaTwo.render(sb);
-        personaResultCard.render(sb);
-        personaResult.render(sb);
+        if (shouldRender) {
+            personaOneCard.render(sb);
+            personaOne.render(sb);
+            personaTwoCard.render(sb);
+            personaTwo.render(sb);
+            personaResultCard.render(sb);
+            personaResult.render(sb);
+        }
     }
 
     public void update() {
@@ -129,18 +133,29 @@ public class PersonaFusionScreen {
         }
         personaOne.update();
         personaTwo.update();
+        personaResult.update();
         fuseButtonHb.update();
+        compendiumButtonHb.update();
         getResultPersona();
+        duration -= Gdx.graphics.getDeltaTime();
+        if (duration < 0.0F) {
+            shouldRender = true; }
         if (InputHelper.justClickedLeft) {
             justClicked = true;
         }
-        if (fuseButtonHb.hovered && InputHelper.justClickedLeft) {
+        if (fuseButtonHb.hovered && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            TipHelper.renderGenericTip((Settings.WIDTH / 2F - fuseButton.getWidth() / 2F)  * Settings.scale, (Settings.HEIGHT / 2F - 125F),
+                    "Notice!", "You cannot fuse during combat.");
+        }
+        if (fuseButtonHb.hovered && InputHelper.justClickedLeft && AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) {
+            shouldRender = false;
+            duration = 0.9F;
             AbstractDungeon.topLevelEffectsQueue.add(new ExhaustEffectTop(personaOneCard));
             AbstractDungeon.player.masterDeck.removeCard(personaOneCard);
             AbstractDungeon.topLevelEffectsQueue.add(new ExhaustEffectTop(personaTwoCard));
             AbstractDungeon.player.masterDeck.removeCard(personaTwoCard);
-            AbstractDungeon.topLevelEffectsQueue.add(new ShowCardAndObtainEffect(CardLibrary.getCopy(personaResultCard.cardID),
-                    Settings.WIDTH / 2F * Settings.scale, Settings.HEIGHT / 2F * Settings.scale));
+            AbstractDungeon.topLevelEffectsQueue.add(new ShowCardAndObtainEffect(personaResultCard.makeStatEquivalentCopy(),
+                    Settings.WIDTH / 2F * Settings.scale, Settings.HEIGHT / 2F * Settings.scale, false));
             personaOneCard = (AbstractPersonaCard) new BlankPersonaCard().makeStatEquivalentCopy();
             personaOneCard.drawScale = 1.0f;
             personaOneCard.current_x = Settings.WIDTH / 4F * Settings.scale;
@@ -154,14 +169,18 @@ public class PersonaFusionScreen {
             personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
             personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
         }
+        if (compendiumButtonHb.hovered && InputHelper.justClickedLeft) {
+            ElizabethModInitializer.compendiumScreen.open();
+        }
+        SpriteBatch sb = null;
         if (personaOne.hovered) {
-            updateCardPreview(personaOneCard);
+            updateCardPreview(personaOneCard, sb);
         }
         if (personaTwo.hovered) {
-            updateCardPreview(personaTwoCard);
+            updateCardPreview(personaTwoCard, sb);
         }
         if (personaResult.hovered) {
-            updateCardPreview(personaResultCard);
+            updateCardPreview(personaResultCard, sb);
         }
         if (personaOne.hovered && InputHelper.justClickedLeft) {
             changePersonaOne = true;
@@ -191,7 +210,7 @@ public class PersonaFusionScreen {
             personaResultCard.current_x = Settings.WIDTH / 2F * Settings.scale;
             personaResultCard.current_y = (Settings.HEIGHT / 2F + 100F) * Settings.scale;
         }
-        if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0 && this.personaChange) {
+        if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0 && personaChange && !CompendiumScreen.compendiumList) {
             for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                 c.unhover();
                 if (changePersonaOne) {
@@ -215,7 +234,8 @@ public class PersonaFusionScreen {
         }
     }
 
-    private void updateCardPreview(AbstractCard c) {
+    private void updateCardPreview(AbstractCard c, SpriteBatch sb) {
+        TipHelper.renderTipForCard(c, sb, c.keywords);
     }
 
     private void openPersonaList() {
@@ -226,8 +246,9 @@ public class PersonaFusionScreen {
                 tmp.addToTop(c);
             }
         }
-        this.personaChange = true;
+        CompendiumScreen.compendiumList = false;
         if (tmp.size() != 0) {
+            personaChange = true;
             AbstractDungeon.gridSelectScreen.open(tmp, 1, "Pick a Persona to fuse.", false);
         }
     }
@@ -931,6 +952,8 @@ public class PersonaFusionScreen {
                         }
                     }
                 }
+            case "null":
+                break;
 
         }
     }

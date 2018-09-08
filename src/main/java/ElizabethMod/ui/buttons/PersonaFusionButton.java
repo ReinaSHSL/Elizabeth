@@ -120,7 +120,7 @@ public class PersonaFusionButton {
 
     public static void renderToolTip(SpriteBatch sb){
         sb.setColor(Color.CYAN);
-        TipHelper.renderGenericTip(xPos - padding, tipYPos, "Velvet Room", "Fuse and purchase Persona.");
+        TipHelper.renderGenericTip(xPos - padding, tipYPos, "Velvet Room", "Fuse and purchase Persona. Cannot be used in battle.");
     }
 
     public static void onClick() {

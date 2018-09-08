@@ -12,7 +12,7 @@ public class TopPanelRenderPatch {
     @SpirePatch(clz = TopPanel.class, method = "renderDeckIcon")
     public static class RenderDeckIcon{
         public static void Postfix(TopPanel __instance, SpriteBatch sb) {
-            if (AbstractDungeon.player instanceof Elizabeth) {
+            if (AbstractDungeon.player instanceof Elizabeth && !AbstractDungeon.getCurrRoom().combatEvent || AbstractDungeon.getCurrRoom().monsters.monsters.size() == 0) {
                 PersonaFusionButton.renderPersonaFusionButton(sb);
             }
         }

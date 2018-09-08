@@ -2,8 +2,8 @@
   "Elizabeth:MemoriesOfYou": {
     "NAME": "Memories Of Them",
     "DESCRIPTIONS": [
-      "Everytime you change Arcana, draw 1 card."
+      "Every time #yWild #yCard is used, draw a card."
     ],
-    "FLAVOR": "Looking at this Persona makes you...nostalgic. It's a reminder of why you're climbing the Spire"
+    "FLAVOR": "A fragment of a previous life before you started your quest to free them. It's a reminder of why you're climbing the Spire"
   }
 }

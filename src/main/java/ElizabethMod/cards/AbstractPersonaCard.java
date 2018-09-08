@@ -9,6 +9,7 @@ public abstract class AbstractPersonaCard extends CustomCard {
     public String arcana;
     public int personaValue = 1;
     public boolean doBonus = false;
+    public int goldValue;
 
     public AbstractPersonaCard(final String id, final String name, final String img, final int cost, final String rawDescription,
                               final AbstractCard.CardType type, final AbstractCard.CardColor color,

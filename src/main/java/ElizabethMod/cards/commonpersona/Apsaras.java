@@ -33,6 +33,7 @@ public class Apsaras extends AbstractPersonaCard {
         this.arcana = "Priestess";
         this.personaValue = 1;
         this.damage = this.baseDamage = DAMAGE_AMT;
+        this.goldValue = 64;
     }
 
     @Override

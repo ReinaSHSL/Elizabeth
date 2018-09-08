@@ -1,7 +1,6 @@
 package ElizabethMod.powers;
 
 import ElizabethMod.actions.AllOutAttackAction;
-import ElizabethMod.actions.StunMonsterAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
