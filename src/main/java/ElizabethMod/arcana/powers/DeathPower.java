@@ -37,6 +37,7 @@ public class DeathPower extends AbstractArcanaPower {
                 new ConfusionPower(AbstractDungeon.player)));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player,
                 new DrawPower(AbstractDungeon.player, 1)));
+        AbstractDungeon.actionManager.addToTop(new GainEnergyAction(1));
         AbstractDungeon.actionManager.addToBottom(new DuplicateRandomEnemyAction());
     }
 

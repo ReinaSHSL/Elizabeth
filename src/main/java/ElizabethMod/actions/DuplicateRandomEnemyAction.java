@@ -27,10 +27,10 @@ public class DuplicateRandomEnemyAction extends AbstractGameAction {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             float posX = 0;
             AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.getRandomMonster();
-            float posY = m.drawY * Settings.scale;
+            float posY = 0;
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (mo.drawX != 0 && mo.drawX < posX) {
-                    posX = mo.drawX * Settings.scale;
+                    posX = mo.drawX;
                 }
             }
             switch(m.id) {
@@ -209,7 +209,7 @@ public class DuplicateRandomEnemyAction extends AbstractGameAction {
                     AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new LouseNormal(posX - 300F, posY), false));
                     break;
                 case Sentry.ID:
-                    AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new Sentry(posX - 300F, posY), false));
+                    AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new Sentry(posX - 500F, posY), false));
                     break;
                 case SlaverBlue.ID:
                     AbstractDungeon.actionManager.addToBottom(new SpawnMonsterAction(new SlaverBlue(posX - 300F, posY), false));

@@ -26,6 +26,11 @@ public class AbstractMonsterPatch {
                     AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction
                             (c, 1, true, false));
                     AbstractDungeon.effectsQueue.add(new ShowCardAndObtainEffect(c, Settings.WIDTH / 2F * Settings.scale,Settings.HEIGHT / 2F * Settings.scale ));
+                    for (AbstractCard ca : ElizabethModInitializer.compendium) {
+                        if (c == ca) {
+                            return;
+                        }
+                    }
                     ElizabethModInitializer.compendium.add((AbstractPersonaCard) c);
                 }
             }

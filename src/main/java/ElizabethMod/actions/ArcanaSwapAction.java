@@ -5,6 +5,7 @@ import ElizabethMod.arcana.cards.AbstractArcanaCard;
 import ElizabethMod.arcana.cards.Chariot;
 import ElizabethMod.arcana.cards.Death;
 import ElizabethMod.arcana.powers.*;
+import ElizabethMod.powers.InevitabilityPower;
 import ElizabethMod.powers.JusticeDamagePower;
 import ElizabethMod.powers.LoversVulnerablePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -61,46 +62,46 @@ public class ArcanaSwapAction extends AbstractGameAction {
                     switch (((AbstractArcanaCard) c).arcanaString) {
                         case "Fool":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new FoolPower(AbstractDungeon.player)));
+                                    new FoolPower(p)));
                             this.isDone = true;
                             break;
                         case "Magician":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new MagicianPower(AbstractDungeon.player)));
+                                    new MagicianPower(p)));
                             this.isDone = true;
                             break;
                         case "Priestess":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new PriestessPower(AbstractDungeon.player)));
+                                    new PriestessPower(p)));
                             this.isDone = true;
                             break;
                         case "Empress":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new EmpressPower(AbstractDungeon.player)));
+                                    new EmpressPower(p)));
                             this.isDone = true;
                             break;
                         case "Emperor":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new EmperorPower(AbstractDungeon.player)));
+                                    new EmperorPower(p)));
                             new TargetAction("Emperor", 1);
                             this.isDone = true;
                             break;
                         case "Hierophant":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new HierophantPower(AbstractDungeon.player)));
+                                    new HierophantPower(p)));
                             this.isDone = true;
                             break;
                         case "Lovers":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new LoversPower(AbstractDungeon.player)));
+                                    new LoversPower(p)));
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new LoversVulnerablePower(AbstractDungeon.player, 1, false)));
+                                    new LoversVulnerablePower(p, 1, false)));
                             new TargetAction("Lovers", 1);
                             this.isDone = true;
                             break;
                         case "Chariot":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new ChariotPower(AbstractDungeon.player)));
+                                    new ChariotPower(p)));
                             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                                 AbstractDungeon.actionManager.addToBottom(new DamageAction(mo,
                                         new DamageInfo(p, 3, DamageInfo.DamageType.NORMAL),
@@ -109,13 +110,13 @@ public class ArcanaSwapAction extends AbstractGameAction {
                             this.isDone = true;
                             break;
                         case "Justice":
-                            for (AbstractPower po : AbstractDungeon.player.powers) {
-                                if (po.ID == JusticeDamagePower.POWER_ID) {
+                            for (AbstractPower po : p.powers) {
+                                if (po.ID.equals(JusticeDamagePower.POWER_ID)) {
                                     justiceList.add((JusticeDamagePower) po);
                                 }
                             }
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new JusticePower(AbstractDungeon.player)));
+                                    new JusticePower(p)));
                             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                                 for (JusticeDamagePower po : justiceList) {
                                     if (po.justiceM == mo) {
@@ -130,34 +131,30 @@ public class ArcanaSwapAction extends AbstractGameAction {
                             break;
                         case "Hermit":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new HermitPower(AbstractDungeon.player)));
+                                    new HermitPower(p)));
                             this.isDone = true;
                             break;
                         case "Fortune":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new FortunePower(AbstractDungeon.player)));
+                                    new FortunePower(p)));
                             this.isDone = true;
                             break;
                         case "Strength":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new StrengthArcanaPower(AbstractDungeon.player)));
+                                    new StrengthArcanaPower(p)));
                             this.isDone = true;
                             break;
                         case "HangedMan":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new HangedManPower(AbstractDungeon.player)));
+                                    new InevitabilityPower(p, 0)));
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new HangedManPower(p)));
                             this.isDone = true;
                             break;
                         case "Death":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new DeathPower(AbstractDungeon.player)));
-                            Iterator arcanaIterate = ElizabethModInitializer.arcanaList.iterator();
-                            while(arcanaIterate.hasNext()) {
-                                Object ca = arcanaIterate.next();
-                                if (ca.getClass().equals(Death.class)) {
-                                    arcanaIterate.remove();
-                                }
-                            }
+                                    new DeathPower(p)));
+                            ElizabethModInitializer.arcanaList.removeIf(ca -> ca.getClass().equals(Death.class));
                             this.isDone = true;
                             break;
                         default:

@@ -61,7 +61,7 @@
   },
   "Elizabeth:HangedMan": {
     "NAME": "Hanged Man",
-    "DESCRIPTION": "Take no damage this turn. NL Lose HP equal to the amount you would've taken at the end of the next turn."
+    "DESCRIPTION": "Take no damage this turn. NL Lose HP twice the amount of HP you would've at the end of next turn."
   },
   "Elizabeth:Death": {
     "NAME": "Death",

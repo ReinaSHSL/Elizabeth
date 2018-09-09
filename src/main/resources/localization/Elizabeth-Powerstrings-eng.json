@@ -88,7 +88,7 @@
   "Elizabeth:AuthorityPower": {
     "NAME": "Authority",
     "DESCRIPTIONS": [
-      "Applying a Debuff will Down this enemy."
+      "Applying a #yDebuff will Down this enemy."
     ]
   },
   "Elizabeth:DownedPower": {
@@ -100,9 +100,9 @@
   "Elizabeth:FrozenPower": {
     "NAME": "Frozen",
     "DESCRIPTIONS": [
-      "This enemy cannot act for ",
-      " turn. ALL Frozen removed upon being attacked.",
-      " turns. ALL Frozen removed upon being attacked."
+      "This enemy cannot act for #b",
+      " turn. ALL #yFrozen removed upon being attacked.",
+      " turns. ALL #yFrozen removed upon being attacked."
     ]
   },
   "Elizabeth:LoversVulnerablePower": {
@@ -122,8 +122,17 @@
   "Elizabeth:JusticeDamagePower": {
     "NAME": "Court Record",
     "DESCRIPTIONS": [
-      "You have taken ",
+      "You have taken #b",
       " damage this combat from a "
+    ]
+  },
+  "Elizabeth:InevitabilityPower": {
+    "NAME": "Inevitability",
+    "DESCRIPTIONS": [
+      "Take 0 damage this turn. ",
+      "Take #b",
+      " damage at the end of next turn.",
+      " damage at the end of this turn."
     ]
   }
 }
