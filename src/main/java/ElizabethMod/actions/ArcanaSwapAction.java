@@ -182,13 +182,6 @@ public class ArcanaSwapAction extends AbstractGameAction implements PostBattleSu
                             this.towerDupe = false;
                             this.isDone = true;
                             break;
-                        case "Sun":
-                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new SunPower(p)));
-                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
-                                    new IcarusPower(p)));
-                            this.isDone = true;
-                            break;
                         case "Star":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                                     new StarPower(p)));
@@ -197,6 +190,20 @@ public class ArcanaSwapAction extends AbstractGameAction implements PostBattleSu
                         case "Moon":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                                     new MoonPower(p)));
+                            AbstractDungeon.actionManager.addToBottom(new MoveToTopOfDeckAction());
+                            this.isDone = true;
+                            break;
+                        case "Sun":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new SunPower(p)));
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new IcarusPower(p)));
+                            this.isDone = true;
+                            break;
+                        case "Judgement":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new JudgementPower(p)));
+                            AbstractDungeon.actionManager.addToBottom(new EqualizeHPAction());
                             this.isDone = true;
                             break;
                         default:

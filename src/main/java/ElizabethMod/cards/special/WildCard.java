@@ -1,6 +1,7 @@
 package ElizabethMod.cards.special;
 
 import ElizabethMod.actions.ArcanaSwapAction;
+import ElizabethMod.arcana.cards.Judgement;
 import ElizabethMod.enums.AbstractCardEnum;
 import ElizabethMod.powers.WildCardPower;
 import basemod.abstracts.CustomCard;

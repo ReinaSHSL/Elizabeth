@@ -38,7 +38,7 @@ public class IcarusPower extends AbstractPower {
     @Override
     public void updateDescription()
     {
-        this.description = (DESCRIPTIONS[2]);
+        this.description = (DESCRIPTIONS[0]);
     }
 
     private static Texture getIcarusPowerTexture() {

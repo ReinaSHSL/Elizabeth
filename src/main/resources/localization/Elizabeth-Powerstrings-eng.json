@@ -109,10 +109,22 @@
       "It is one that gives hope to those on the ground below. It shines in times of need. But, eventually, it is destined to fall to the earth and disappear... Even I can feel the sadness of this inescapable destiny..."
     ]
   },
+  "Elizabeth:MoonPower": {
+    "NAME": "Moon",
+    "DESCRIPTIONS": [
+      "Those who cannot let go, cannot move on."
+    ]
+  },
   "Elizabeth:SunPower": {
     "NAME": "Sun",
     "DESCRIPTIONS": [
-      "It is truly precious to see the good in the bad."
+      "It is valuable to see what lies beyond your own hubris."
+    ]
+  },
+  "Elizabeth:JudgementPower": {
+    "NAME": "Judgement",
+    "DESCRIPTIONS": [
+      "Judgement is a certainty, freedom a luxury."
     ]
   },
   "Elizabeth:IcarusPower": {

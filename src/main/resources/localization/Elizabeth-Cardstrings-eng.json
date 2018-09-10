@@ -71,6 +71,10 @@
     "NAME": "Temperance",
     "DESCRIPTION": "You cannot play more than 2 cards this turn. NL Take half damage this turn."
   },
+  "Elizabeth:Devil": {
+    "NAME": "Devil",
+    "DESCRIPTION": "Gain 3 Strength until you swap Arcana. NL You can no longer Block for the rest of combat."
+  },
   "Elizabeth:Tower": {
     "NAME": "Tower",
     "DESCRIPTION": "Duplicate an enemy. NL Can only duplicate once."
@@ -81,7 +85,7 @@
   },
   "Elizabeth:Moon": {
     "NAME": "Moon",
-    "DESCRIPTION": "Randomize an enemy's intent."
+    "DESCRIPTION": "Move a card from your draw pile to the top of your draw pile."
   },
   "Elizabeth:Sun": {
     "NAME": "Sun",
@@ -89,7 +93,7 @@
   },
   "Elizabeth:Judgement": {
     "NAME": "Judgement",
-    "DESCRIPTION": "ALL enemy HP become the average HP of ALL enemies."
+    "DESCRIPTION": "ALL enemy's HP become the average HP of ALL enemies."
   },
 
 

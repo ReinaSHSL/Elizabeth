@@ -25,11 +25,12 @@ public class FortuneAction extends AbstractGameAction {
                 this.isDone = true;
                 return;
             }
-            final CardGroup tmpGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+            CardGroup tmpGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
             for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
                 tmpGroup.addToTop(c);
             }
             AbstractDungeon.gridSelectScreen.open(tmpGroup, 3, true, FortuneAction.TEXT[0]);
+            this.tickDuration();
         }
         else if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             for (final AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
@@ -40,7 +41,6 @@ public class FortuneAction extends AbstractGameAction {
             AbstractCard c = AbstractDungeon.player.drawPile.getNCardFromTop(rng);
             AbstractDungeon.player.drawPile.moveToHand(c, AbstractDungeon.player.hand);
         }
-        this.tickDuration();
         this.isDone = true;
     }
 
