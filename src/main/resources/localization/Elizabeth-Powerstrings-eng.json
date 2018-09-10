@@ -91,6 +91,36 @@
       "True happiness can be found in the acceptance of others."
     ]
   },
+  "Elizabeth:DevilPower": {
+    "NAME": "Devil",
+    "DESCRIPTIONS": [
+      "One's greatest strength is the ability to break away from one's primal desires."
+    ]
+  },
+  "Elizabeth:TowerPower": {
+    "NAME": "Tower",
+    "DESCRIPTIONS": [
+      "Disaster comes to all...one may not be able to escape it, but one can see it as an opportunity."
+    ]
+  },
+  "Elizabeth:StarPower": {
+    "NAME": "Star",
+    "DESCRIPTIONS": [
+      "It is one that gives hope to those on the ground below. It shines in times of need. But, eventually, it is destined to fall to the earth and disappear... Even I can feel the sadness of this inescapable destiny..."
+    ]
+  },
+  "Elizabeth:SunPower": {
+    "NAME": "Sun",
+    "DESCRIPTIONS": [
+      "It is truly precious to see the good in the bad."
+    ]
+  },
+  "Elizabeth:IcarusPower": {
+    "NAME": "Icarus",
+    "DESCRIPTIONS": [
+      "Every card is exhausted on use."
+    ]
+  },
   "Elizabeth:AuthorityPower": {
     "NAME": "Authority",
     "DESCRIPTIONS": [

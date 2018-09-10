@@ -65,12 +65,33 @@
   },
   "Elizabeth:Death": {
     "NAME": "Death",
-    "DESCRIPTION": "Gain [E] every turn, draw an extra card every turn. NL Lost upon switch. NL Confuse. NL Copy a random enemy. NL Can only be used once per combat."
+    "DESCRIPTION": "Draw an extra card and gain [E] every turn. Lost upon switch. NL Confuse yourself. Copy a random enemy. NL Can no longer become Death."
   },
   "Elizabeth:Temperance": {
     "NAME": "Temperance",
     "DESCRIPTION": "You cannot play more than 2 cards this turn. NL Take half damage this turn."
   },
+  "Elizabeth:Tower": {
+    "NAME": "Tower",
+    "DESCRIPTION": "Duplicate an enemy. NL Can only duplicate once."
+  },
+  "Elizabeth:Star": {
+    "NAME": "Star",
+    "DESCRIPTION": "Draw 4 cards and shuffle 2 Pride into your deck."
+  },
+  "Elizabeth:Moon": {
+    "NAME": "Moon",
+    "DESCRIPTION": "Randomize an enemy's intent."
+  },
+  "Elizabeth:Sun": {
+    "NAME": "Sun",
+    "DESCRIPTION": "Gain one Strength until you swap Arcana. NL Exhaust every card on use."
+  },
+  "Elizabeth:Judgement": {
+    "NAME": "Judgement",
+    "DESCRIPTION": "ALL enemy HP become the average HP of ALL enemies."
+  },
+
 
   //MODAL CARDS
 

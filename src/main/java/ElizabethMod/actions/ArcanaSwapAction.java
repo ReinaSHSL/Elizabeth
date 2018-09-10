@@ -5,10 +5,8 @@ import ElizabethMod.arcana.cards.AbstractArcanaCard;
 import ElizabethMod.arcana.cards.Chariot;
 import ElizabethMod.arcana.cards.Death;
 import ElizabethMod.arcana.powers.*;
-import ElizabethMod.powers.InevitabilityPower;
-import ElizabethMod.powers.JusticeDamagePower;
-import ElizabethMod.powers.LoversVulnerablePower;
-import ElizabethMod.powers.ModerationPower;
+import ElizabethMod.powers.*;
+import basemod.interfaces.PostBattleSubscriber;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -22,15 +20,18 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.NoBlockPower;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ArcanaSwapAction extends AbstractGameAction {
+public class ArcanaSwapAction extends AbstractGameAction implements PostBattleSubscriber {
     private static String[] TEXT;
     private AbstractPlayer p;
     private AbstractMonster m = null;
     private ArrayList<JusticeDamagePower> justiceList = new ArrayList<>();
+    private boolean towerDupe = true;
 
     public ArcanaSwapAction(AbstractPlayer p) {
         this.p = p;
@@ -165,6 +166,39 @@ public class ArcanaSwapAction extends AbstractGameAction {
                                     new ModerationPower(p)));
                             this.isDone = true;
                             break;
+                        case "Devil":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new DevilPower(p)));
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new NoBlockPower(p, 99, false)));
+                            this.isDone = true;
+                            break;
+                        case "Tower":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new TowerPower(p)));
+                            if (this.towerDupe) {
+                                AbstractDungeon.actionManager.addToBottom(new DuplicateRandomEnemyAction());
+                            }
+                            this.towerDupe = false;
+                            this.isDone = true;
+                            break;
+                        case "Sun":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new SunPower(p)));
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new IcarusPower(p)));
+                            this.isDone = true;
+                            break;
+                        case "Star":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new StarPower(p)));
+                            this.isDone = true;
+                            break;
+                        case "Moon":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new MoonPower(p)));
+                            this.isDone = true;
+                            break;
                         default:
                             this.isDone = true;
                             break;
@@ -179,6 +213,11 @@ public class ArcanaSwapAction extends AbstractGameAction {
     static {
         String[] uiText = {"The Arcana is the means by which all is revealed."};
         TEXT = uiText;
+    }
+
+    @Override
+    public void receivePostBattle(AbstractRoom abstractRoom) {
+        this.towerDupe = true;
     }
 }
 
