@@ -8,6 +8,7 @@ import ElizabethMod.arcana.powers.*;
 import ElizabethMod.powers.InevitabilityPower;
 import ElizabethMod.powers.JusticeDamagePower;
 import ElizabethMod.powers.LoversVulnerablePower;
+import ElizabethMod.powers.ModerationPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -155,6 +156,13 @@ public class ArcanaSwapAction extends AbstractGameAction {
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                                     new DeathPower(p)));
                             ElizabethModInitializer.arcanaList.removeIf(ca -> ca.getClass().equals(Death.class));
+                            this.isDone = true;
+                            break;
+                        case "Temperance":
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new TemperancePower(p)));
+                            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
+                                    new ModerationPower(p)));
                             this.isDone = true;
                             break;
                         default:

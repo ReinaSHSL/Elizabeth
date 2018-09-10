@@ -12,17 +12,15 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 public class FortuneAction extends AbstractGameAction {
 
     public static final String[] TEXT = {"May fortune smile upon thee."};
-    private float startingDuration;
 
     public FortuneAction() {
         this.actionType = ActionType.CARD_MANIPULATION;
-        this.startingDuration = Settings.ACTION_DUR_FAST;
-        this.duration = this.startingDuration;
+        this.duration = Settings.ACTION_DUR_FAST;
     }
 
     @Override
     public void update() {
-        if (this.duration == this.startingDuration) {
+        if (this.duration == Settings.ACTION_DUR_FAST) {
             if (AbstractDungeon.player.drawPile.isEmpty()) {
                 this.isDone = true;
                 return;
@@ -31,7 +29,7 @@ public class FortuneAction extends AbstractGameAction {
             for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
                 tmpGroup.addToTop(c);
             }
-            AbstractDungeon.gridSelectScreen.open(tmpGroup, this.amount, true, FortuneAction.TEXT[0]);
+            AbstractDungeon.gridSelectScreen.open(tmpGroup, 3, true, FortuneAction.TEXT[0]);
         }
         else if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             for (final AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
@@ -43,6 +41,7 @@ public class FortuneAction extends AbstractGameAction {
             AbstractDungeon.player.drawPile.moveToHand(c, AbstractDungeon.player.hand);
         }
         this.tickDuration();
+        this.isDone = true;
     }
 
 }

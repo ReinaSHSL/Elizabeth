@@ -67,6 +67,10 @@
     "NAME": "Death",
     "DESCRIPTION": "Gain [E] every turn, draw an extra card every turn. NL Lost upon switch. NL Confuse. NL Copy a random enemy. NL Can only be used once per combat."
   },
+  "Elizabeth:Temperance": {
+    "NAME": "Temperance",
+    "DESCRIPTION": "You cannot play more than 2 cards this turn. NL Take half damage this turn."
+  },
 
   //MODAL CARDS
 

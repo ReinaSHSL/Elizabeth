@@ -85,6 +85,12 @@
       "The moment man devoured the fruit of knowledge, he sealed his fate... Entrusting his future to the cards, man clings to a dim hope. Yes, the Arcana is the means by which all is revealed... Beyond the beaten path lies the absolute end. It matters not who you are... Death awaits you."
     ]
   },
+  "Elizabeth:TemperancePower": {
+    "NAME": "Temperance",
+    "DESCRIPTIONS": [
+      "True happiness can be found in the acceptance of others."
+    ]
+  },
   "Elizabeth:AuthorityPower": {
     "NAME": "Authority",
     "DESCRIPTIONS": [
@@ -133,6 +139,14 @@
       "Take #b",
       " damage at the end of next turn.",
       " damage at the end of this turn."
+    ]
+  },
+  "Elizabeth:ModerationPower": {
+    "NAME": "Moderation",
+    "DESCRIPTIONS": [
+      "Take half damage this turn, and you cannot play more than #b",
+      " card this turn.",
+      " cards this turn."
     ]
   }
 }

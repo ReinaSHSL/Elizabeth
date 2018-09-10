@@ -27,7 +27,7 @@ public class CompendiumScreen {
         AbstractDungeon.screen = ScreenStatePatch.PERSONA_FUSION_SCREEN;
         CardGroup tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         for (AbstractCard c : ElizabethModInitializer.compendium) {
-            AbstractCardPatch.Field.isCompendium.set(c, true);
+            AbstractCardPatch.isCompendiumField.isCompendium.set(c, true);
             tmp.addToTop(c);
         }
         if (tmp.size() != 0) {

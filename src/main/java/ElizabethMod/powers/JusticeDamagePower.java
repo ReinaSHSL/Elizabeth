@@ -32,6 +32,11 @@ public class JusticeDamagePower extends AbstractPower {
     }
 
     @Override
+    public void atEndOfRound() {
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
+    }
+
+    @Override
     public void updateDescription()
     {
         this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + justiceM.name + "."   );
