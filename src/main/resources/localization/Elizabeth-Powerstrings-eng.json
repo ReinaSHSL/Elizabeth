@@ -156,7 +156,8 @@
   "Elizabeth:LoversVulnerablePower": {
     "NAME": "Vulnerable",
     "DESCRIPTIONS": [
-      " Removed upon being hit."
+      " instances of damage. Removed upon being hit.",
+      "the next "
     ]
   },
   "Elizabeth:Stunned": {

@@ -123,9 +123,16 @@
 },
   "Elizabeth:Oberon": {
     "NAME": "Oberon",
-    "DESCRIPTION": "Lovers NL Deal !D! damage. NL Bonus: Charm the enemy."
+    "DESCRIPTION": "Emperor NL Deal !D! damage. NL Bonus: Draw 1 card."
   },
-
+  "Elizabeth:Valkyrie": {
+    "NAME": "Valkyrie",
+    "DESCRIPTION": "Strength NL Deal !D! damage. NL Bonus: Deal another !D! damage."
+  },
+  "Elizabeth:Nigitama": {
+    "NAME": "Nigitama",
+    "DESCRIPTION": "Temperance NL Deal !D! damage. NL Bonus: Put a Basic Persona from your draw pile on top of your deck."
+  },
 
   //UNCOMMON PERSONA
 

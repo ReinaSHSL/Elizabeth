@@ -2,9 +2,7 @@ package ElizabethMod;
 
 import ElizabethMod.arcana.cards.*;
 import ElizabethMod.cards.AbstractPersonaCard;
-import ElizabethMod.cards.commonpersona.Apsaras;
-import ElizabethMod.cards.commonpersona.JackFrost;
-import ElizabethMod.cards.commonpersona.Oberon;
+import ElizabethMod.cards.commonpersona.*;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.cards.uncommonpersona.QueenMab;
 import ElizabethMod.character.Elizabeth;
@@ -107,10 +105,12 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         //Non-Persona Cards
         BaseMod.addCard(new WildCard());
 
-        //Common Persona
+        //Basic Persona
         BaseMod.addCard(new Apsaras());
         BaseMod.addCard(new JackFrost());
         BaseMod.addCard(new Oberon());
+        BaseMod.addCard(new Valkyrie());
+        BaseMod.addCard(new NigiTama());
 
         //Uncommon Persona
         BaseMod.addCard(new QueenMab());
@@ -127,12 +127,23 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         listOfPriestessPersona.add(new Apsaras());
 
         //List of Lovers
-        listOfLoversPersona.add(new Oberon());
         listOfLoversPersona.add(new QueenMab());
+
+        //List of Emperors
+        listOfEmperorPersona.add(new Oberon());
+
+        //List of Strength
+        listOfStrengthPersona.add(new Valkyrie());
+
+        //List of Temperance
+        listOfTemperancePersona.add(new NigiTama());
 
         //List of Basic Persona
         listOfBasicPersona.add(new JackFrost());
         listOfBasicPersona.add(new Apsaras());
+        listOfBasicPersona.add(new Oberon());
+        listOfBasicPersona.add(new Valkyrie());
+        listOfBasicPersona.add(new NigiTama());
 
         //List of Uncommon Persona
         listOfUncommonPersona.add(new QueenMab());
@@ -164,6 +175,8 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         compendium.add(new JackFrost());
         compendium.add(new Apsaras());
         compendium.add(new Oberon());
+        compendium.add(new Valkyrie());
+        compendium.add(new NigiTama());
     }
 
     @Override

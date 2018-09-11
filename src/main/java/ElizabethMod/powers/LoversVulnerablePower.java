@@ -27,9 +27,7 @@ public class LoversVulnerablePower extends AbstractPower {
         this.amount = amount;
         this.updateDescription();
         this.loadRegion("vulnerable");
-        if (AbstractDungeon.actionManager.turnHasEnded && isSourceMonster) {
-            this.justApplied = true;
-        }
+        this.justApplied = true;
         this.type = PowerType.DEBUFF;
     }
 
@@ -48,7 +46,7 @@ public class LoversVulnerablePower extends AbstractPower {
     public void updateDescription() {
         if (this.amount == 1) {
             if (this.owner != null && this.owner.isPlayer && AbstractDungeon.player.hasRelic("Odd Mushroom")) {
-                this.description = VulnerablePower.DESCRIPTIONS[0] + 25 + VulnerablePower.DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[0];
+                this.description = VulnerablePower.DESCRIPTIONS[0] + 25 + VulnerablePower.DESCRIPTIONS[1] + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[0];
             }
             else if (this.owner != null && !this.owner.isPlayer && AbstractDungeon.player.hasRelic("Paper Frog")) {
                 this.description = VulnerablePower.DESCRIPTIONS[0] + 75 + VulnerablePower.DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[0];
@@ -74,17 +72,20 @@ public class LoversVulnerablePower extends AbstractPower {
             return damage;
         }
         if (this.owner.isPlayer && AbstractDungeon.player.hasRelic("Odd Mushroom")) {
-            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, ID));
             return damage * 1.25f;
         }
         if (this.owner != null && !this.owner.isPlayer && AbstractDungeon.player.hasRelic("Paper Frog")) {
-            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, ID));
             return damage * 1.75f;
         }
-        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, ID));
+
         return damage * 1.5f;
     }
 
+    @Override
+    public int onAttacked(DamageInfo info, int damage) {
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, ID));
+        return damage;
+    }
 
     @Override
     public void stackPower(int stackAmount) {
