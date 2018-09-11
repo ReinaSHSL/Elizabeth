@@ -115,12 +115,17 @@
 
   "Elizabeth:Apsaras": {
     "NAME": "Apsaras",
-    "DESCRIPTION": "Priestess NL Deal !D! damage. NL Bonus: Gain 1 Artifact."
+    "DESCRIPTION": "Priestess NL Deal !D! damage. NL Bonus: Gain 1 Artifact. NL Exhaust."
   },
   "Elizabeth:JackFrost": {
-    "NAME": "Jack Frost",
-    "DESCRIPTION": "Magician NL Deal !D! damage. NL Bonus: Costs 3 Energy. Freeze the enemy."
+  "NAME": "Jack Frost",
+  "DESCRIPTION": "Magician NL Deal !D! damage. NL Bonus: Costs 3 Energy. Freeze the enemy."
+},
+  "Elizabeth:Oberon": {
+    "NAME": "Oberon",
+    "DESCRIPTION": "Lovers NL Deal !D! damage. NL Bonus: Charm the enemy."
   },
+
 
   //UNCOMMON PERSONA
 

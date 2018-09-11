@@ -183,6 +183,12 @@
       " damage at the end of this turn."
     ]
   },
+  "Elizabeth:CharmPower": {
+    "NAME": "Charm",
+    "DESCRIPTIONS": [
+      "This enemy will hit themself this turn."
+    ]
+  },
   "Elizabeth:ModerationPower": {
     "NAME": "Moderation",
     "DESCRIPTIONS": [

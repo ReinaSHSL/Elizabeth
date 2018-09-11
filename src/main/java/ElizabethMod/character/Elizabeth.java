@@ -4,17 +4,22 @@ import ElizabethMod.ElizabethModInitializer;
 import ElizabethMod.arcana.cards.Death;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.enums.ElizabethEnum;
+import ElizabethMod.powers.CharmPower;
 import basemod.BaseMod;
 import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
 import basemod.interfaces.OnStartBattleSubscriber;
 import basemod.interfaces.PostBattleSubscriber;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.daily.DailyMods;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 
@@ -85,6 +90,23 @@ public class Elizabeth extends CustomPlayer implements OnStartBattleSubscriber, 
         }
         if (!containsDeath) {
             ElizabethModInitializer.arcanaList.add(13, new Death());
+        }
+    }
+
+    @Override
+    public void damage(DamageInfo info) {
+        AbstractMonster owner;
+        if(info.owner instanceof  AbstractMonster && info.type == DamageInfo.DamageType.NORMAL) {
+            owner = (AbstractMonster) info.owner;
+            if (owner.hasPower(CharmPower.POWER_ID)) {
+                AbstractDungeon.actionManager.addToBottom(new DamageAction(owner, new DamageInfo(owner, info.base, info.type),
+                        AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+            } else {
+                super.damage(info);
+            }
+        }
+        else {
+            super.damage(info);
         }
     }
 }

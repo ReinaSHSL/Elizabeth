@@ -4,6 +4,7 @@ import ElizabethMod.arcana.cards.*;
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.cards.commonpersona.Apsaras;
 import ElizabethMod.cards.commonpersona.JackFrost;
+import ElizabethMod.cards.commonpersona.Oberon;
 import ElizabethMod.cards.special.WildCard;
 import ElizabethMod.cards.uncommonpersona.QueenMab;
 import ElizabethMod.character.Elizabeth;
@@ -109,6 +110,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         //Common Persona
         BaseMod.addCard(new Apsaras());
         BaseMod.addCard(new JackFrost());
+        BaseMod.addCard(new Oberon());
 
         //Uncommon Persona
         BaseMod.addCard(new QueenMab());
@@ -125,6 +127,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         listOfPriestessPersona.add(new Apsaras());
 
         //List of Lovers
+        listOfLoversPersona.add(new Oberon());
         listOfLoversPersona.add(new QueenMab());
 
         //List of Basic Persona
@@ -160,6 +163,7 @@ public class ElizabethModInitializer implements EditCharactersSubscriber, EditCa
         //Initialize Starting Persona into Compendium
         compendium.add(new JackFrost());
         compendium.add(new Apsaras());
+        compendium.add(new Oberon());
     }
 
     @Override
