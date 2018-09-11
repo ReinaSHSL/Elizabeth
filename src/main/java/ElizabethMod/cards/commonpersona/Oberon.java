@@ -2,6 +2,7 @@ package ElizabethMod.cards.commonpersona;
 
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import ElizabethMod.powers.CharmPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -32,7 +33,7 @@ public class Oberon extends AbstractPersonaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.VELVET_BLUE,
                         rarity, target);
-        this.arcana = "Emperor";
+        this.arcana = ArcanaEnum.Arcana.EMPEROR;
         this.personaValue = 1;
         this.damage = this.baseDamage = DAMAGE_AMT;
     }

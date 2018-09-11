@@ -2,6 +2,7 @@ package ElizabethMod.cards.commonpersona;
 
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -31,7 +32,7 @@ public class Apsaras extends AbstractPersonaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.VELVET_BLUE,
                         rarity, target);
-        this.arcana = "Priestess";
+        this.arcana = ArcanaEnum.Arcana.PRIESTESS;
         this.personaValue = 1;
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.goldValue = 64;

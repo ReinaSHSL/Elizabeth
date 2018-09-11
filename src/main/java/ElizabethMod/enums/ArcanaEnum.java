@@ -1,7 +1,7 @@
 package ElizabethMod.enums;
 
 public class ArcanaEnum {
-    enum Arcana {
+    public enum Arcana {
         FOOL,
         MAGICIAN,
         PRIESTESS,
@@ -14,7 +14,7 @@ public class ArcanaEnum {
         HERMIT,
         FORTUNE,
         STRENGTH,
-        HANGED_MAN,
+        HANGEDMAN,
         DEATH,
         TEMPERANCE,
         DEVIL,
@@ -22,6 +22,7 @@ public class ArcanaEnum {
         STAR,
         MOON,
         SUN,
-        JUDGEMENT
+        JUDGEMENT,
+        UNIVERSE
     }
 }

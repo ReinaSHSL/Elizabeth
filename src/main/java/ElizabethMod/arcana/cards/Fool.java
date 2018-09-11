@@ -1,6 +1,7 @@
 package ElizabethMod.arcana.cards;
 
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -22,7 +23,7 @@ public class Fool extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaString = "Fool";
+        this.arcanaString = ArcanaEnum.Arcana.FOOL;
     }
 
     @Override

@@ -3,6 +3,7 @@ package ElizabethMod.cards.commonpersona;
 import ElizabethMod.actions.StunMonsterAction;
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import ElizabethMod.powers.FrozenPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -31,7 +32,7 @@ public class JackFrost extends AbstractPersonaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcana = "Magician";
+        this.arcana = ArcanaEnum.Arcana.MAGICIAN;
         this.personaValue = 1;
         this.damage = this.baseDamage = DAMAGE_AMT;
         this.goldValue = 80;

@@ -264,10 +264,10 @@ public class PersonaFusionScreen {
         String resultantArcana;
         ArrayList<AbstractPersonaCard> lesserPersonaList = new ArrayList<>();
         int checkValue = 0;
-        String concatenatedArcana = personaOneCard.arcana + personaTwoCard.arcana;
+        String concatenatedArcana = personaOneCard.arcana.toString() + personaTwoCard.arcana.toString();
         resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
         if (resultantArcana == null) {
-            concatenatedArcana = personaTwoCard.arcana + personaOneCard.arcana;
+            concatenatedArcana = personaTwoCard.arcana.toString() + personaOneCard.arcana.toString();
             resultantArcana = ElizabethModInitializer.personaFusionCombinations.get(concatenatedArcana);
         }
         int resultantValue = personaOneCard.personaValue + personaTwoCard.personaValue;

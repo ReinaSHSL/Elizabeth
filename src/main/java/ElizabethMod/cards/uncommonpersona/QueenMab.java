@@ -2,6 +2,7 @@ package ElizabethMod.cards.uncommonpersona;
 
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,7 +24,7 @@ public class QueenMab extends AbstractPersonaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                         rarity, target);
-        this.arcana = "Lovers";
+        this.arcana = ArcanaEnum.Arcana.LOVERS;
         this.personaValue = 2;
     }
 

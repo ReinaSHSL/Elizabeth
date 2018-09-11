@@ -1,12 +1,13 @@
 package ElizabethMod.cards;
 
 import ElizabethMod.arcana.powers.AbstractArcanaPower;
+import ElizabethMod.enums.ArcanaEnum;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public abstract class AbstractPersonaCard extends CustomCard {
     public boolean isPersona = true;
-    public String arcana;
+    public ArcanaEnum.Arcana arcana;
     public int personaValue = 1;
     public boolean doBonus = false;
     public int goldValue;

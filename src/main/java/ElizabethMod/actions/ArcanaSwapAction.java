@@ -61,7 +61,7 @@ public class ArcanaSwapAction extends AbstractGameAction implements PostBattleSu
         } else {
             if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
-                    switch (((AbstractArcanaCard) c).arcanaString) {
+                    switch (((AbstractArcanaCard) c).arcanaString.toString()) {
                         case "Fool":
                             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p,
                                     new FoolPower(p)));

@@ -2,6 +2,7 @@ package ElizabethMod.arcana.cards;
 
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -26,7 +27,7 @@ public class Justice extends AbstractArcanaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                 rarity, target);
-        this.arcanaString = "Justice";
+        this.arcanaString = ArcanaEnum.Arcana.JUSTICE;
     }
 
     @Override

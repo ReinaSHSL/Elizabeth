@@ -2,6 +2,7 @@ package ElizabethMod.cards.screencards;
 
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,7 +24,7 @@ public class BlankPersonaCard extends AbstractPersonaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL, AbstractCardEnum.VELVET_BLUE,
                         rarity, target);
-        this.arcana = "Universe";
+        this.arcana = ArcanaEnum.Arcana.UNIVERSE;
         this.personaValue = 0;
     }
 

@@ -3,6 +3,7 @@ package ElizabethMod.cards.commonpersona;
 import ElizabethMod.actions.MoveBasicPersonaToTopOfDeckAction;
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -32,7 +33,7 @@ public class NigiTama extends AbstractPersonaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.VELVET_BLUE,
                         rarity, target);
-        this.arcana = "Temperance";
+        this.arcana = ArcanaEnum.Arcana.TEMPERANCE;
         this.personaValue = 1;
         this.damage = this.baseDamage = DAMAGE_AMT;
     }

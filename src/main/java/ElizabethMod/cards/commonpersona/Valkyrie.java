@@ -2,6 +2,7 @@ package ElizabethMod.cards.commonpersona;
 
 import ElizabethMod.cards.AbstractPersonaCard;
 import ElizabethMod.enums.AbstractCardEnum;
+import ElizabethMod.enums.ArcanaEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -29,7 +30,7 @@ public class Valkyrie extends AbstractPersonaCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK, AbstractCardEnum.VELVET_BLUE,
                         rarity, target);
-        this.arcana = "Strength";
+        this.arcana = ArcanaEnum.Arcana.STRENGTH;
         this.personaValue = 1;
         this.damage = this.baseDamage = DAMAGE_AMT;
     }
